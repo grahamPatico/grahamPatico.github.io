@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Graham Patterson</title>
-<meta name="description" content="Graham Patterson. Founder and engineer. Connected hardware, firmware, and the software that runs it.">
+<meta name="description" content="Graham Patterson. Founder and engineer. A build log: hardware, firmware, software, 2020 to now.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230E5A3A'/><circle cx='50' cy='50' r='20' fill='none' stroke='%23F6F7F4' stroke-width='8'/><circle cx='50' cy='50' r='6' fill='%23C47A3D'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,27 +22,22 @@
     --sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-  }
   body {
     background: var(--paper);
     color: var(--ink);
     font-family: var(--sans);
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
   a { color: var(--mask); text-decoration-thickness: 1px; text-underline-offset: 3px; }
   a:hover { color: var(--copper); }
-  a:focus-visible, button:focus-visible {
+  a:focus-visible {
     outline: 2px solid var(--copper);
     outline-offset: 3px;
     border-radius: 2px;
   }
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
   /* ---- title block ---- */
   .titleblock {
@@ -52,41 +47,41 @@
     display: grid;
     grid-template-columns: 1fr auto;
   }
-  .tb-main { padding: 40px 36px 36px; }
+  .tb-main { padding: 32px 30px 28px; }
   .tb-eyebrow {
     font-family: var(--mono);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--mask);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
   h1 {
-    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.02;
   }
   .tb-role {
     font-family: var(--mono);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--ink-soft);
-    margin-top: 14px;
+    margin-top: 10px;
   }
   .tb-role b { color: var(--copper); font-weight: 600; }
   .tb-side {
     border-left: 1.5px solid var(--ink);
     display: flex;
     flex-direction: column;
-    min-width: 220px;
+    min-width: 200px;
   }
   .tb-side a {
     font-family: var(--mono);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     letter-spacing: 0.04em;
     text-decoration: none;
     color: var(--ink);
-    padding: 14px 20px;
+    padding: 12px 18px;
     border-bottom: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
@@ -94,208 +89,122 @@
     gap: 16px;
     flex: 1;
   }
-  .tb-side a:last-child { border-bottom: 0; }
   .tb-side a span { color: var(--ink-soft); }
+  .tb-side a:last-child { border-bottom: 0; }
   .tb-side a:hover { background: var(--paper); color: var(--mask); }
 
-  /* ---- sections ---- */
-  section { margin-top: 72px; }
-  .sec-head {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    border-bottom: 1.5px solid var(--ink);
-    padding-bottom: 10px;
-    margin-bottom: 28px;
-  }
-  .sec-head h2 {
-    font-size: 1.05rem;
-    font-weight: 600;
+  .intro {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 40px 0 12px;
     letter-spacing: 0.02em;
   }
-  .sec-head .tag {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mask);
-  }
-  .lede { max-width: 62ch; color: var(--ink); }
-  .lede p + p { margin-top: 1em; }
-  .lede .quiet { color: var(--ink-soft); }
+  .intro b { color: var(--ink); font-weight: 600; }
 
-  /* ---- flagship ---- */
-  .flagship { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: start; }
-  .flagship-copy p { color: var(--ink); max-width: 48ch; }
-  .flagship-copy p + p { margin-top: 1em; }
-  .flagship-copy .quiet { color: var(--ink-soft); }
-  .flag-specs {
-    margin-top: 24px;
-    border-top: 1px solid var(--line);
-  }
-  .flag-specs div {
+  /* ---- the log ---- */
+  .log { list-style: none; border-top: 1.5px solid var(--ink); }
+  .log > li { border-bottom: 1px solid var(--line); }
+  .row {
     display: grid;
-    grid-template-columns: 120px 1fr;
-    gap: 12px;
-    padding: 9px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.9rem;
+    grid-template-columns: 34px 58px 200px 1fr auto;
+    gap: 18px;
+    align-items: baseline;
+    padding: 20px 8px;
+    transition: background-color 0.15s ease;
   }
-  .flag-specs dt {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--mask);
-    padding-top: 3px;
-  }
-  .flag-specs dd { color: var(--ink-soft); }
-  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .shots figure {
-    border: 1px solid var(--line);
-    background: var(--panel);
-    overflow: hidden;
-  }
-  .shots img { display: block; width: 100%; height: auto; }
-  .shots figcaption {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    color: var(--ink-soft);
-    padding: 8px 10px;
-    border-top: 1px solid var(--line);
-  }
-
-  /* ---- revision history ---- */
-  .revtable { width: 100%; min-width: 640px; border-collapse: collapse; background: var(--panel); border: 1.5px solid var(--ink); }
-  .revtable th {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: left;
-    color: var(--paper);
-    background: var(--mask);
-    padding: 10px 16px;
-    font-weight: 500;
-  }
-  .revtable td {
-    padding: 14px 16px;
-    border-top: 1px solid var(--line);
-    vertical-align: top;
-    font-size: 0.95rem;
-  }
-  .revtable td:first-child {
+  .log > li:hover { background: var(--panel); }
+  .rev {
     font-family: var(--mono);
     font-size: 0.8rem;
-    color: var(--copper);
-    white-space: nowrap;
     font-weight: 600;
-  }
-  .revtable td:nth-child(2) { font-weight: 600; white-space: nowrap; }
-  .revtable td:last-child { color: var(--ink-soft); }
-  .rev-scroll { overflow-x: auto; }
-
-  /* ---- projects ---- */
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  .card {
-    border: 1px solid var(--line);
-    background: var(--panel);
-    padding: 22px 22px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: border-color 0.15s ease;
-  }
-  .card:hover { border-color: var(--mask); }
-  .card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
-  .card h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
-  .card .lang {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--copper);
-    white-space: nowrap;
   }
-  .card p { font-size: 0.92rem; color: var(--ink-soft); flex: 1; }
-  .card .card-link {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    text-decoration: none;
-    letter-spacing: 0.04em;
-  }
-  .card .card-link::after { content: " ↗"; }
-  .card .private {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--ink-soft);
-    letter-spacing: 0.06em;
-  }
-
-  /* ---- skills ---- */
-  .skills { border: 1.5px solid var(--ink); background: var(--panel); }
-  .skill-row {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    border-bottom: 1px solid var(--line);
-  }
-  .skill-row:last-child { border-bottom: 0; }
-  .skill-row h3 {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--mask);
-    padding: 18px 20px;
-    border-right: 1px solid var(--line);
-  }
-  .skill-row ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 15px 20px;
-    align-content: center;
-  }
-  .skill-row li {
-    font-size: 0.85rem;
-    border: 1px solid var(--line);
-    padding: 3px 10px;
-    color: var(--ink);
-    background: var(--paper);
-  }
-
-  /* ---- footer ---- */
-  footer {
-    margin-top: 88px;
-    border-top: 1.5px solid var(--ink);
-    padding: 28px 0 48px;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
+  .yr {
     font-family: var(--mono);
     font-size: 0.78rem;
     color: var(--ink-soft);
   }
+  .yr.nd { color: var(--line); }
+  .row h2 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .row p { font-size: 0.92rem; color: var(--ink-soft); }
+  .go {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .go::after { content: " ↗"; }
+  .tagp {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 0 8px 20px 110px;
+  }
+  .shots a { display: block; border: 1px solid var(--line); background: var(--panel); }
+  .shots a:hover { border-color: var(--mask); }
+  .shots img { display: block; width: 100%; height: auto; }
+
+  /* ---- skills ---- */
+  .skills { margin-top: 56px; border: 1.5px solid var(--ink); background: var(--panel); }
+  .skills > div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.88rem;
+  }
+  .skills > div:last-child { border-bottom: 0; }
+  .skills h3 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--mask);
+    padding-top: 3px;
+  }
+  .skills p { color: var(--ink-soft); }
+
+  footer {
+    margin: 64px 0 48px;
+    border-top: 1.5px solid var(--ink);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+  }
   footer a { color: var(--ink); }
 
-  @media (max-width: 860px) {
+  @media (max-width: 720px) {
     .titleblock { grid-template-columns: 1fr; }
-    .tb-side { border-left: 0; border-top: 1.5px solid var(--ink); flex-direction: row; flex-wrap: wrap; }
-    .tb-side a { flex: 1 1 auto; border-bottom: 0; border-right: 1px solid var(--line); }
-    .tb-side a:last-child { border-right: 0; align-items: center; }
-    .flagship { grid-template-columns: 1fr; }
-    .grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 560px) {
-    .grid { grid-template-columns: 1fr; }
-    .shots { grid-template-columns: 1fr; }
-    .skill-row { grid-template-columns: 1fr; }
-    .skill-row h3 { border-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
-    .tb-main { padding: 28px 22px; }
+    .tb-side { border-left: 0; border-top: 1.5px solid var(--ink); }
+    .row {
+      grid-template-columns: 22px 44px 1fr auto;
+      gap: 10px;
+      row-gap: 4px;
+    }
+    .row h2 { grid-column: 3; }
+    .row .go, .row .tagp { grid-column: 4; }
+    .row p { grid-column: 3 / -1; }
+    .shots { grid-template-columns: 1fr 1fr; padding-left: 8px; }
+    .skills > div { grid-template-columns: 1fr; gap: 4px; }
   }
 </style>
 </head>
@@ -305,8 +214,8 @@
   <header class="titleblock">
     <div class="tb-main">
       <p class="tb-eyebrow">Hardware · Firmware · Software</p>
-      <h1>Graham<br>Patterson</h1>
-      <p class="tb-role"><b>Founder &amp; Engineer</b> · builds connected products end to end</p>
+      <h1>Graham Patterson</h1>
+      <p class="tb-role"><b>Founder &amp; Engineer</b> · board to firmware to fleet to app</p>
     </div>
     <nav class="tb-side" aria-label="Contact">
       <a href="https://ocutrap.com"><span>company</span>ocutrap.com</a>
@@ -315,118 +224,141 @@
     </nav>
   </header>
 
-  <section id="about">
-    <div class="sec-head"><span class="tag">§1</span><h2>About</h2></div>
-    <div class="lede">
-      <p>I design the board, write the firmware, run the fleet, and ship the app. One person, whole stack: schematic and PCB layout, embedded C++ on cellular hardware, over-the-air updates, image recognition, and the web and mobile software customers actually touch.</p>
-      <p class="quiet">Founder of OcuTrap, where all of that runs in production on live hardware in the field.</p>
-    </div>
-  </section>
+  <p class="intro"><b>Build log.</b> Everything shipped, 2020 to now. One person, whole stack.</p>
 
-  <section id="ocutrap">
-    <div class="sec-head"><span class="tag">§2</span><h2>OcuTrap, the flagship</h2></div>
-    <div class="flagship">
-      <div class="flagship-copy">
-        <p>A cellular smart trap for wildlife control. It watches its own doorway with time-of-flight ranging, photographs what walks in, closes the door with a motor it controls to the millimeter, and reports home over LTE.</p>
-        <p class="quiet">Every layer is built in house: the PCB, the embedded C++ firmware, the camera module, the OTA release pipeline, the image recognition that identifies the animal, and the real-time web and mobile app that runs on Convex.</p>
-        <dl class="flag-specs">
-          <div><dt>Hardware</dt><dd>Custom PCB, ToF sensing, motor drive, camera, cellular</dd></div>
-          <div><dt>Firmware</dt><dd>Embedded C++, OTA fleet updates, power management</dd></div>
-          <div><dt>Vision</dt><dd>Automated species detection on trap captures</dd></div>
-          <div><dt>Platform</dt><dd>React + React Native app, Convex backend, Shopify store</dd></div>
-        </dl>
+  <ol class="log">
+    <li><div class="row">
+      <span class="rev">A</span><span class="yr">2020</span>
+      <h2>Camera experiments</h2>
+      <p>OV2640 modules, images off tiny boards.</p>
+      <a class="go" href="https://github.com/grahamPatico/micropython-ov2640-Pycom">github</a>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">B</span><span class="yr">2021</span>
+      <h2>OcuTrap, the idea</h2>
+      <p>Traps don't report. Build one that does.</p>
+      <a class="go" href="https://ocutrap.com">ocutrap.com</a>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">C</span><span class="yr">2021</span>
+      <h2>Prototypes</h2>
+      <p>Dev boards, first cellular captures, duct tape.</p>
+      <span class="tagp">bench</span>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">D</span><span class="yr">2022</span>
+      <h2>OcuRover</h2>
+      <p>Remote rover platform. Multiple iterations, cameras, motors, radios.</p>
+      <span class="tagp">private</span>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">E</span><span class="yr nd">····</span>
+      <h2>Weather station</h2>
+      <p>Environmental sensing, logging, reporting.</p>
+      <span class="tagp">personal</span>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">F</span><span class="yr">2023</span>
+      <h2>OcuGate</h2>
+      <p>Connected gate control, same cellular DNA.</p>
+      <span class="tagp">private</span>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">G</span><span class="yr nd">····</span>
+      <h2>R1, production trap</h2>
+      <p>Custom PCB, motorized door, ToF capture detection, OTA fleet updates. Ships today.</p>
+      <a class="go" href="https://ocutrap.com">ocutrap.com</a>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">H</span><span class="yr nd">····</span>
+      <h2>OcuCam</h2>
+      <p>In-house ESP32 camera module. Images over cellular from nowhere.</p>
+      <span class="tagp">shipped</span>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">I</span><span class="yr nd">····</span>
+      <h2>Image recognition</h2>
+      <p>Species detection on every capture. Raccoon vs possum, automatically.</p>
+      <span class="tagp">shipped</span>
+    </div></li>
+    <li>
+      <div class="row">
+        <span class="rev">J</span><span class="yr nd">····</span>
+        <h2>OcuTrap platform</h2>
+        <p>Real-time web + mobile app on Convex. Fleet ops, analytics, billing, storefront.</p>
+        <a class="go" href="https://ocutrap.com">ocutrap.com</a>
       </div>
       <div class="shots">
-        <figure><img src="img/11-trap-detail.jpg" alt="OcuTrap app, trap detail view" loading="lazy"><figcaption>trap detail</figcaption></figure>
-        <figure><img src="img/28-map.jpg" alt="OcuTrap app, fleet map view" loading="lazy"><figcaption>fleet map</figcaption></figure>
-        <figure><img src="img/30-analytics.jpg" alt="OcuTrap app, analytics view" loading="lazy"><figcaption>analytics</figcaption></figure>
-        <figure><img src="img/39-fleet-grid.jpg" alt="OcuTrap app, fleet grid view" loading="lazy"><figcaption>fleet grid</figcaption></figure>
+        <a href="img/11-trap-detail.jpg"><img src="img/11-trap-detail.jpg" alt="Trap detail view" loading="lazy"></a>
+        <a href="img/28-map.jpg"><img src="img/28-map.jpg" alt="Fleet map view" loading="lazy"></a>
+        <a href="img/30-analytics.jpg"><img src="img/30-analytics.jpg" alt="Analytics view" loading="lazy"></a>
+        <a href="img/39-fleet-grid.jpg"><img src="img/39-fleet-grid.jpg" alt="Fleet grid view" loading="lazy"></a>
       </div>
-    </div>
-  </section>
+    </li>
+    <li><div class="row">
+      <span class="rev">K</span><span class="yr nd">····</span>
+      <h2>Christmas tree sizer</h2>
+      <p>Measures trees from images. Seasonal problem, engineered answer.</p>
+      <span class="tagp">personal</span>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">L</span><span class="yr">2026</span>
+      <h2>Fabware</h2>
+      <p>Describe a part, get a manufacturable DXF + McMaster-Carr BOM.</p>
+      <a class="go" href="https://github.com/grahamPatico/fabware">github</a>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">M</span><span class="yr">2026</span>
+      <h2>HeicDrop</h2>
+      <p>macOS menu bar image converter. One Swift file, zero dependencies.</p>
+      <a class="go" href="https://github.com/grahamPatico/HeicDrop">github</a>
+    </div></li>
+    <li><div class="row">
+      <span class="rev">N</span><span class="yr">2026</span>
+      <h2>X1, next generation</h2>
+      <p>New radio architecture, designed in KiCad. On the bench now.</p>
+      <span class="tagp">in design</span>
+    </div></li>
+  </ol>
 
-  <section id="history">
-    <div class="sec-head"><span class="tag">§3</span><h2>Revision history</h2></div>
-    <div class="rev-scroll">
-      <table class="revtable">
-        <thead><tr><th>Rev</th><th>Milestone</th><th>What changed</th></tr></thead>
-        <tbody>
-          <tr><td>A</td><td>Ideation</td><td>Trail cameras tell you an animal was there. Traps do not tell you anything. The idea: a trap that reports.</td></tr>
-          <tr><td>B</td><td>Prototypes</td><td>Off-the-shelf dev boards, first cellular captures, duct tape where engineering would later go.</td></tr>
-          <tr><td>C</td><td>OcuRover</td><td>Side quest into remote rover platforms. Multiple iterations. Taught camera, motor, and radio lessons the trap inherited.</td></tr>
-          <tr><td>D</td><td>R1 production</td><td>Custom PCB, motorized door, ToF capture detection, OTA updates. The trap that ships today.</td></tr>
-          <tr><td>E</td><td>OcuCam</td><td>In-house ESP32 camera module. Images over cellular from the middle of nowhere.</td></tr>
-          <tr><td>F</td><td>Image recognition</td><td>Species detection on every capture. The trap now knows raccoon from possum.</td></tr>
-          <tr><td>G</td><td>Platform rebuild</td><td>Web and mobile app rebuilt on Convex. Real-time fleet ops, analytics, billing, storefront.</td></tr>
-          <tr><td>H</td><td>X1, in design</td><td>Next generation. New radio architecture, tighter integration, designed in KiCad. On the bench now.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="sec-head"><span class="tag">§4</span><h2>Other projects</h2></div>
-    <div class="grid">
-      <article class="card">
-        <div class="card-top"><h3>Fabware</h3><span class="lang">TypeScript</span></div>
-        <p>AI harness for hardware. Describe a part, get a manufacturable DXF for SendCutSend and a McMaster-Carr assembly BOM. A Lovable for hardware.</p>
-        <a class="card-link" href="https://github.com/grahamPatico/fabware">github.com/grahamPatico/fabware</a>
-      </article>
-      <article class="card">
-        <div class="card-top"><h3>HeicDrop</h3><span class="lang">Swift</span></div>
-        <p>macOS menu bar image converter. Drag onto the icon, pick format and size, done. Pure AppKit, one source file, zero dependencies, no network code.</p>
-        <a class="card-link" href="https://github.com/grahamPatico/HeicDrop">github.com/grahamPatico/HeicDrop</a>
-      </article>
-      <article class="card">
-        <div class="card-top"><h3>OcuGate</h3><span class="lang">C / C++</span></div>
-        <p>Connected gate control. Embedded firmware for remote access hardware, same cellular DNA as the trap line.</p>
-        <span class="private">private build</span>
-      </article>
-      <article class="card">
-        <div class="card-top"><h3>OcuRover</h3><span class="lang">Python / C++</span></div>
-        <p>Remote rover platform, built and rebuilt across multiple iterations. Cameras, motors, and radios in the field.</p>
-        <span class="private">private build</span>
-      </article>
-      <article class="card">
-        <div class="card-top"><h3>Christmas tree sizer</h3><span class="lang">Vision</span></div>
-        <p>Measures Christmas trees from images. Seasonal problem, engineered answer.</p>
-        <span class="private">personal build</span>
-      </article>
-      <article class="card">
-        <div class="card-top"><h3>Weather station</h3><span class="lang">Sensors</span></div>
-        <p>Connected weather station build. Environmental sensing, logging, and reporting hardware.</p>
-        <span class="private">personal build</span>
-      </article>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="sec-head"><span class="tag">§5</span><h2>Skills</h2></div>
-    <div class="skills">
-      <div class="skill-row">
-        <h3>Firmware</h3>
-        <ul><li>Embedded C / C++</li><li>ESP32</li><li>Particle</li><li>OTA fleet updates</li><li>I2C / SPI / UART</li><li>Power management</li><li>Cellular / LTE</li></ul>
-      </div>
-      <div class="skill-row">
-        <h3>Hardware</h3>
-        <ul><li>KiCad</li><li>PCB layout</li><li>Fusion 360</li><li>Sensor integration</li><li>Motor control</li><li>DFM &amp; contract manufacturing</li><li>Battery systems</li></ul>
-      </div>
-      <div class="skill-row">
-        <h3>Software</h3>
-        <ul><li>TypeScript</li><li>React</li><li>React Native / Expo</li><li>Convex</li><li>Node.js</li><li>Python</li><li>Swift / AppKit</li></ul>
-      </div>
-      <div class="skill-row">
-        <h3>Product</h3>
-        <ul><li>Computer vision pipelines</li><li>Shopify / Liquid</li><li>Fleet operations</li><li>Analytics</li><li>CI / CD</li><li>Founder-level everything else</li></ul>
-      </div>
-    </div>
-  </section>
+  <div class="skills">
+    <div><h3>Firmware</h3><p>Embedded C/C++ · ESP32 · Particle · OTA · I2C/SPI/UART · cellular · power</p></div>
+    <div><h3>Hardware</h3><p>KiCad · PCB layout · Fusion 360 · sensors · motor control · DFM · batteries</p></div>
+    <div><h3>Software</h3><p>TypeScript · React · React Native · Convex · Node · Python · Swift</p></div>
+    <div><h3>Product</h3><p>Vision pipelines · Shopify · fleet ops · analytics · CI/CD · everything else</p></div>
+  </div>
 
   <footer>
     <span>Graham Patterson · Founder &amp; Engineer</span>
-    <span><a href="mailto:graham@ocutrap.com">graham@ocutrap.com</a> · <a href="https://github.com/grahamPatico">GitHub</a> · <a href="https://ocutrap.com">OcuTrap</a></span>
+    <span><a href="mailto:graham@ocutrap.com">email</a> · <a href="https://github.com/grahamPatico">GitHub</a> · <a href="https://ocutrap.com">OcuTrap</a></span>
   </footer>
 
 </div>
+
+<script type="module">
+  // Scroll-in reveal via motion (vanilla build). Page works untouched if this fails.
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    try {
+      const { animate } = await import("https://cdn.jsdelivr.net/npm/motion@11.13.5/+esm");
+      const rows = [...document.querySelectorAll(".log > li")];
+      for (const li of rows) {
+        li.style.opacity = "0";
+        li.style.transform = "translateY(10px)";
+      }
+      const reveal = () => {
+        for (const li of rows) {
+          if (li.dataset.shown) continue;
+          if (li.getBoundingClientRect().top < innerHeight * 0.96) {
+            li.dataset.shown = "1";
+            animate(li, { opacity: 1, transform: "translateY(0)" }, { duration: 0.45, ease: [0.22, 1, 0.36, 1] });
+          }
+        }
+      };
+      addEventListener("scroll", reveal, { passive: true });
+      addEventListener("resize", reveal);
+      reveal();
+    } catch (e) { /* no motion, no problem */ }
+  }
+</script>
 </body>
 </html>
