@@ -226,7 +226,7 @@
   .sec-note { font-size: 0.92rem; color: var(--ink-soft); }
 
   /* ---- selected work ---- */
-  .work { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 32px; }
+  .work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 32px; }
   .case-lead {
     grid-column: 1 / -1;
     display: grid;
@@ -244,9 +244,9 @@
   .shot.shot-info {   /* app facts where a picture will go */
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    gap: 20px;
+    gap: 24px;
     align-items: center;
-    padding: 20px 22px;
+    padding: 24px 28px;
   }
   .shot.shot-info img { width: 84px; height: 84px; border-radius: 19px; border: 1px solid var(--line); }
   .shot-info strong { display: block; font-family: var(--cond); font-weight: 600; font-size: 1.08rem; margin-bottom: 2px; }
@@ -332,10 +332,6 @@
     .hero { grid-template-columns: 1fr; gap: 44px; padding-bottom: 72px; }
     .lede { max-width: 34ch; }
     .work { gap: 44px 24px; }
-    .shot.shot-info { grid-template-columns: 1fr; padding: 12px 16px; }
-    .shot.shot-info img { display: none; }
-    .shot-info strong { font-size: 0.98rem; }
-    .shot-info ul { font-size: 0.76rem; line-height: 1.4; }
     .row { grid-template-columns: 22px 46px 180px minmax(0, 1fr) 98px; }
     .row .lay { grid-column: 4; grid-row: 2; }
     .row .go, .row .st { grid-column: 5; grid-row: 1; }
@@ -354,10 +350,6 @@
     .stack-hint { padding-left: 46px; }
     .sec { padding-bottom: 68px; }
     .work { grid-template-columns: 1fr; gap: 44px; }
-    .shot.shot-info { grid-template-columns: auto minmax(0, 1fr); padding: 20px 22px; }
-    .shot.shot-info img { display: block; }
-    .shot-info strong { font-size: 1.08rem; }
-    .shot-info ul { font-size: 0.85rem; line-height: 1.5; }
     .case-lead { grid-template-columns: 1fr; gap: 0; }
     .case-lead .case-text { padding-top: 16px; }
     .row { grid-template-columns: 20px 40px minmax(0, 1fr) auto; gap: 4px 10px; padding: 15px 4px; }
@@ -413,10 +405,10 @@
         <ol class="parts" aria-label="Layers of the stack. Select one to filter the build log.">
           <li style="--i:0"><button type="button" data-set-layer="app" data-jump aria-pressed="false"><span class="no">1</span><span class="what"><span class="nm">App</span><span class="tools">TypeScript, React, React Native, Swift</span></span><span class="qty" data-count="app">5</span></button></li>
           <li style="--i:1"><button type="button" data-set-layer="cloud" data-jump aria-pressed="false"><span class="no">2</span><span class="what"><span class="nm">Cloud</span><span class="tools">Convex, Node, Python, vision pipelines</span></span><span class="qty" data-count="cloud">3</span></button></li>
-          <li style="--i:2"><button type="button" data-set-layer="radio" data-jump aria-pressed="false"><span class="no">3</span><span class="what"><span class="nm">Radio</span><span class="tools">Cellular, OTA fleet updates</span></span><span class="qty" data-count="radio">6</span></button></li>
-          <li style="--i:3"><button type="button" data-set-layer="fw" data-jump aria-pressed="false"><span class="no">4</span><span class="what"><span class="nm">Firmware</span><span class="tools">Embedded C/C++, ESP32, Particle, power</span></span><span class="qty" data-count="fw">7</span></button></li>
-          <li style="--i:4"><button type="button" data-set-layer="board" data-jump aria-pressed="false"><span class="no">5</span><span class="what"><span class="nm">Board</span><span class="tools">KiCad, PCB layout, sensors, motor control</span></span><span class="qty" data-count="board">3</span></button></li>
-          <li style="--i:5"><button type="button" data-set-layer="mech" data-jump aria-pressed="false"><span class="no">6</span><span class="what"><span class="nm">Mechanical</span><span class="tools">Fusion 360, enclosures, DFM</span></span><span class="qty" data-count="mech">2</span></button></li>
+          <li style="--i:2"><button type="button" data-set-layer="radio" data-jump aria-pressed="false"><span class="no">3</span><span class="what"><span class="nm">Radio</span><span class="tools">Cellular, OTA fleet updates</span></span><span class="qty" data-count="radio">7</span></button></li>
+          <li style="--i:3"><button type="button" data-set-layer="fw" data-jump aria-pressed="false"><span class="no">4</span><span class="what"><span class="nm">Firmware</span><span class="tools">Embedded C/C++, ESP32, Particle, power</span></span><span class="qty" data-count="fw">8</span></button></li>
+          <li style="--i:4"><button type="button" data-set-layer="board" data-jump aria-pressed="false"><span class="no">5</span><span class="what"><span class="nm">Board</span><span class="tools">KiCad, PCB layout, sensors, motor control</span></span><span class="qty" data-count="board">4</span></button></li>
+          <li style="--i:5"><button type="button" data-set-layer="mech" data-jump aria-pressed="false"><span class="no">6</span><span class="what"><span class="nm">Mechanical</span><span class="tools">Fusion 360, enclosures, DFM</span></span><span class="qty" data-count="mech">3</span></button></li>
         </ol>
         <p class="stack-hint">One person, whole stack. Select a layer to filter the build log.</p>
       </div>
@@ -490,13 +482,23 @@
         </div>
       </article>
 
+      <article class="case">
+        <div class="shot"><img src="img/nightjar.jpg" width="1400" height="875" loading="lazy" alt="Two Nightjar rear bike lights glowing red in the dark"></div>
+        <div class="case-text">
+          <p class="kind">Side project</p>
+          <h3>Nightjar</h3>
+          <p>Rear bike light with GPS and a cellular tracker inside. Production design and first prototype board done, nothing built yet.</p>
+          <p class="case-links"><a href="https://nightjar-bike.vercel.app">nightjar-bike.vercel.app</a></p>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <section class="sec" id="log">
     <div class="sec-head">
       <h2>Build log</h2>
-      <p class="sec-note" id="log-count" aria-live="polite">14 entries, 2020 to now</p>
+      <p class="sec-note" id="log-count" aria-live="polite">15 entries, 2020 to now</p>
     </div>
 
     <div class="filters">
@@ -616,6 +618,13 @@
         <p>New radio architecture, designed in KiCad. On the bench now.</p>
         <span class="lay">Board, Radio</span>
         <span class="st">in design</span>
+      </div></li>
+      <li data-kind="side" data-layers="mech board fw radio"><div class="row">
+        <span class="rev">O</span><span class="yr">2026</span>
+        <h3>Nightjar</h3>
+        <p>Rear bike light that is also a GPS and cellular tracker. Designed, not built yet.</p>
+        <span class="lay">Mechanical, Board, Firmware, Radio</span>
+        <a class="go" href="https://nightjar-bike.vercel.app">site</a>
       </div></li>
     </ol>
     <p class="log-empty" id="log-empty" hidden>Nothing in the log matches both filters. <button type="button" id="log-clear">Clear filters</button></p>
