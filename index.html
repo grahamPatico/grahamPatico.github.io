@@ -226,7 +226,7 @@
   .sec-note { font-size: 0.92rem; color: var(--ink-soft); }
 
   /* ---- selected work ---- */
-  .work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 32px; }
+  .work { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 32px; }
   .case-lead {
     grid-column: 1 / -1;
     display: grid;
@@ -241,6 +241,16 @@
     overflow: hidden;
   }
   .shot img { width: 100%; height: 100%; object-fit: cover; }
+  .shot.shot-info {   /* app facts where a picture will go */
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 20px;
+    align-items: center;
+    padding: 20px 22px;
+  }
+  .shot.shot-info img { width: 84px; height: 84px; border-radius: 19px; border: 1px solid var(--line); }
+  .shot-info strong { display: block; font-family: var(--cond); font-weight: 600; font-size: 1.08rem; margin-bottom: 2px; }
+  .shot-info ul { list-style: none; font-size: 0.85rem; line-height: 1.5; color: var(--ink-soft); }
   .case-text { padding-top: 16px; }
   .case-lead .case-text { padding-top: 0; }
   .case h3 { font-family: var(--cond); font-weight: 600; font-size: 1.55rem; line-height: 1.15; }
@@ -321,6 +331,11 @@
   @media (max-width: 1000px) {
     .hero { grid-template-columns: 1fr; gap: 44px; padding-bottom: 72px; }
     .lede { max-width: 34ch; }
+    .work { gap: 44px 24px; }
+    .shot.shot-info { grid-template-columns: 1fr; padding: 12px 16px; }
+    .shot.shot-info img { display: none; }
+    .shot-info strong { font-size: 0.98rem; }
+    .shot-info ul { font-size: 0.76rem; line-height: 1.4; }
     .row { grid-template-columns: 22px 46px 180px minmax(0, 1fr) 98px; }
     .row .lay { grid-column: 4; grid-row: 2; }
     .row .go, .row .st { grid-column: 5; grid-row: 1; }
@@ -339,6 +354,10 @@
     .stack-hint { padding-left: 46px; }
     .sec { padding-bottom: 68px; }
     .work { grid-template-columns: 1fr; gap: 44px; }
+    .shot.shot-info { grid-template-columns: auto minmax(0, 1fr); padding: 20px 22px; }
+    .shot.shot-info img { display: block; }
+    .shot-info strong { font-size: 1.08rem; }
+    .shot-info ul { font-size: 0.85rem; line-height: 1.5; }
     .case-lead { grid-template-columns: 1fr; gap: 0; }
     .case-lead .case-text { padding-top: 16px; }
     .row { grid-template-columns: 20px 40px minmax(0, 1fr) auto; gap: 4px 10px; padding: 15px 4px; }
@@ -392,7 +411,7 @@
       <div class="partlist">
         <p class="parts-head" aria-hidden="true"><span>Layer</span><span>Log entries</span></p>
         <ol class="parts" aria-label="Layers of the stack. Select one to filter the build log.">
-          <li style="--i:0"><button type="button" data-set-layer="app" data-jump aria-pressed="false"><span class="no">1</span><span class="what"><span class="nm">App</span><span class="tools">TypeScript, React, React Native, Swift</span></span><span class="qty" data-count="app">4</span></button></li>
+          <li style="--i:0"><button type="button" data-set-layer="app" data-jump aria-pressed="false"><span class="no">1</span><span class="what"><span class="nm">App</span><span class="tools">TypeScript, React, React Native, Swift</span></span><span class="qty" data-count="app">5</span></button></li>
           <li style="--i:1"><button type="button" data-set-layer="cloud" data-jump aria-pressed="false"><span class="no">2</span><span class="what"><span class="nm">Cloud</span><span class="tools">Convex, Node, Python, vision pipelines</span></span><span class="qty" data-count="cloud">3</span></button></li>
           <li style="--i:2"><button type="button" data-set-layer="radio" data-jump aria-pressed="false"><span class="no">3</span><span class="what"><span class="nm">Radio</span><span class="tools">Cellular, OTA fleet updates</span></span><span class="qty" data-count="radio">6</span></button></li>
           <li style="--i:3"><button type="button" data-set-layer="fw" data-jump aria-pressed="false"><span class="no">4</span><span class="what"><span class="nm">Firmware</span><span class="tools">Embedded C/C++, ESP32, Particle, power</span></span><span class="qty" data-count="fw">7</span></button></li>
@@ -447,6 +466,30 @@
         </div>
       </article>
 
+      <article class="case">
+        <!-- TODO (Graham): add OcuGate images (product photos, app screens). Then replace this info tile
+             with <div class="shot"><img ...></div> like the cards above. -->
+        <div class="shot shot-info">
+          <img src="img/ocugate-icon.jpg" width="256" height="256" loading="lazy" alt="OcuGate app icon: a gate under a cellular signal">
+          <div>
+            <strong>OcuGate for iPhone</strong>
+            <ul>
+              <li>Open and close the gate</li>
+              <li>Battery and cell signal</li>
+              <li>Temperature</li>
+              <li>Users and shared access</li>
+              <li>Multiple gates</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-text">
+          <p class="kind">OcuGate</p>
+          <h3>OcuGate app</h3>
+          <p>Cellular gate controller with an iPhone app. Open, close and share access from anywhere there is cell signal. On the App Store since 2023.</p>
+          <p class="case-links"><a href="https://apps.apple.com/us/app/ocugate/id1571187146">App Store</a><a href="https://ocugate.com">ocugate.com</a></p>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -483,19 +526,19 @@
         <span class="lay">Firmware</span>
         <a class="go" href="https://github.com/grahamPatico/micropython-ov2640-Pycom">GitHub</a>
       </div></li>
-      <li data-kind="side" data-layers="app"><div class="row">
-        <span class="rev">B</span><span class="yr">2020</span>
-        <h3>Xmas Tree Sizer</h3>
-        <p>iPhone AR app. See a Christmas tree at different heights in your room before you buy one.</p>
-        <span class="lay">App</span>
-        <a class="go" href="https://apps.apple.com/us/app/xmas-tree-sizer/id1545536375">App Store</a>
-      </div></li>
       <li data-kind="ocutrap" data-layers=""><div class="row">
-        <span class="rev">C</span><span class="yr">2021</span>
+        <span class="rev">B</span><span class="yr">2020</span>
         <h3>OcuTrap, the idea</h3>
         <p>Traps don't report. Build one that does.</p>
         <span class="lay"></span>
         <a class="go" href="https://ocutrap.com">ocutrap.com</a>
+      </div></li>
+      <li data-kind="side" data-layers="app"><div class="row">
+        <span class="rev">C</span><span class="yr">2020</span>
+        <h3>Xmas Tree Sizer</h3>
+        <p>iPhone AR app. See a Christmas tree at different heights in your room before you buy one.</p>
+        <span class="lay">App</span>
+        <a class="go" href="https://apps.apple.com/us/app/xmas-tree-sizer/id1545536375">App Store</a>
       </div></li>
       <li data-kind="ocutrap" data-layers="fw radio"><div class="row">
         <span class="rev">D</span><span class="yr">2021</span>
@@ -518,12 +561,12 @@
         <span class="lay">Firmware</span>
         <span class="st">personal</span>
       </div></li>
-      <li data-kind="side" data-layers="fw radio"><div class="row">
+      <li data-kind="side" data-layers="fw radio app"><div class="row">
         <span class="rev">G</span><span class="yr">2023</span>
         <h3>OcuGate</h3>
-        <p>Connected gate control, same cellular DNA.</p>
-        <span class="lay">Firmware, Radio</span>
-        <a class="go" href="https://ocugate.com">ocugate.com</a>
+        <p>Cellular gate controller with an iPhone app. Open, close and share access from anywhere.</p>
+        <span class="lay">Firmware, Radio, App</span>
+        <a class="go" href="https://apps.apple.com/us/app/ocugate/id1571187146">App Store</a>
       </div></li>
       <li data-kind="ocutrap" data-layers="mech board fw radio"><div class="row">
         <span class="rev">H</span><span class="yr"></span>
@@ -582,7 +625,7 @@
     <div class="sec-head"><h2>About</h2></div>
     <div class="about">
       <div class="about-body">
-        <p>Founder and engineer at OcuTrap since 2021. Traps don't report, so I built one that does: the board, the firmware, the cellular link, the cloud and the apps. Outside OcuTrap I build small tools and hardware projects. Most of them are in the build log.</p>
+        <p>Founder and engineer at OcuTrap since 2020. Traps don't report, so I built one that does: the board, the firmware, the cellular link, the cloud and the apps. Outside OcuTrap I build small tools and hardware projects. Most of them are in the build log.</p>
         <dl class="tools-table">
           <div><dt>Firmware</dt><dd>Embedded C/C++, ESP32, Particle, OTA, I2C/SPI/UART, cellular, power</dd></div>
           <div><dt>Hardware</dt><dd>KiCad, PCB layout, Fusion 360, sensors, motor control, DFM, batteries</dd></div>
