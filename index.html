@@ -4,11 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Graham Patterson</title>
-<meta name="description" content="Graham Patterson. Founder and engineer. A build log: hardware, firmware, software, 2020 to now.">
+<meta name="description" content="Graham Patterson. Founder and engineer at OcuTrap. Hardware, firmware and software, 2020 to now.">
+<meta property="og:title" content="Graham Patterson">
+<meta property="og:description" content="Founder and engineer. Connected hardware from circuit board to app.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://graham-patterson.vercel.app/">
+<meta property="og:image" content="https://graham-patterson.vercel.app/img/platform.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://graham-patterson.vercel.app/">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230E5A3A'/><circle cx='50' cy='50' r='20' fill='none' stroke='%23F6F7F4' stroke-width='8'/><circle cx='50' cy='50' r='6' fill='%23C47A3D'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F6F7F4;
@@ -16,12 +24,21 @@
     --ink: #17211B;
     --ink-soft: #4C5852;
     --line: #D6DAD3;
-    --mask: #0E5A3A;      /* soldermask green */
-    --copper: #B4622D;    /* copper accent */
-    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --edge: #AEB6AD;        /* plate sides, plate textures */
+    --mask: #0E5A3A;        /* soldermask green */
+    --copper: #B4622D;      /* copper, fills only */
+    --copper-ink: #974C1D;  /* copper dark enough for small text */
+    --fr4: #C9BE8C;         /* bare board edge */
+    --pad: #E3C16F;         /* gold pads */
     --sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    --cond: "IBM Plex Sans Condensed", "IBM Plex Sans", "Arial Narrow", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --s: 150px;             /* plate edge before the isometric transform */
+    --gap: 50px;            /* vertical pitch between plates, and parts list row height */
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
   body {
     background: var(--paper);
     color: var(--ink);
@@ -30,335 +47,624 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
+  img { display: block; max-width: 100%; }
   a { color: var(--mask); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-  a:hover { color: var(--copper); }
-  a:focus-visible {
+  a:hover { color: var(--copper-ink); }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  a:focus-visible, button:focus-visible {
     outline: 2px solid var(--copper);
     outline-offset: 3px;
     border-radius: 2px;
   }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-  /* ---- title block ---- */
-  .titleblock {
-    border: 1.5px solid var(--ink);
-    background: var(--panel);
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-  }
-  .tb-main { padding: 32px 30px 28px; }
-  .tb-eyebrow {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--mask);
-    margin-bottom: 10px;
-  }
-  h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
-  }
-  .tb-role {
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    margin-top: 10px;
-  }
-  .tb-role b { color: var(--copper); font-weight: 600; }
-  .tb-side {
-    border-left: 1.5px solid var(--ink);
-    display: flex;
-    flex-direction: column;
-    min-width: 200px;
-  }
-  .tb-side a {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    color: var(--ink);
-    padding: 12px 18px;
-    border-bottom: 1px solid var(--line);
+  /* ---- top bar ---- */
+  .top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    flex: 1;
+    padding: 22px 0;
   }
-  .tb-side a span { color: var(--ink-soft); }
-  .tb-side a:last-child { border-bottom: 0; }
-  .tb-side a:hover { background: var(--paper); color: var(--mask); }
+  .mark { display: block; line-height: 0; }
+  .top nav { display: flex; gap: 26px; font-size: 0.95rem; }
+  .top nav a { color: var(--ink); text-decoration: none; }
+  .top nav a:hover { color: var(--mask); text-decoration: underline; }
 
-  .intro {
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    margin: 40px 0 12px;
-    letter-spacing: 0.02em;
-  }
-  .intro b { color: var(--ink); font-weight: 600; }
-
-  /* ---- the log ---- */
-  .log { list-style: none; border-top: 1.5px solid var(--ink); }
-  .log > li { border-bottom: 1px solid var(--line); }
-  .row {
+  /* ---- hero ---- */
+  .hero {
     display: grid;
-    grid-template-columns: 34px 58px 200px 1fr auto;
-    gap: 18px;
-    align-items: baseline;
-    padding: 20px 8px;
-    transition: background-color 0.15s ease;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 56px;
+    align-items: center;
+    padding: 44px 0 84px;
   }
-  .log > li:hover { background: var(--panel); }
-  .rev {
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--copper);
+  .hero h1 {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: clamp(3.6rem, 8.4vw, 6.25rem);
+    line-height: 0.9;
+    letter-spacing: -0.025em;
   }
-  .yr {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-  }
-  .yr.nd { color: var(--line); }
-  .row h2 {
-    font-size: 1.02rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-  .row p { font-size: 0.92rem; color: var(--ink-soft); }
-  .go {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    white-space: nowrap;
-    text-decoration: none;
-  }
-  .go::after { content: " ↗"; }
-  .tagp {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--ink-soft);
-    white-space: nowrap;
-    letter-spacing: 0.05em;
-  }
-  .shots {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    padding: 0 8px 20px 110px;
-  }
-  .shots a { display: block; border: 1px solid var(--line); background: var(--panel); }
-  .shots a:hover { border-color: var(--mask); }
-  .shots img { display: block; width: 100%; height: auto; }
+  .hero h1 span { display: block; }
+  .lede { font-size: 1.3rem; line-height: 1.42; max-width: 27ch; margin-top: 26px; }
+  .reach { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px; font-size: 0.98rem; }
 
-  /* ---- skills ---- */
-  .skills { margin-top: 56px; border: 1.5px solid var(--ink); background: var(--panel); }
-  .skills > div {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 14px;
-    padding: 12px 18px;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.88rem;
+  /* ---- the stack: six plates, a parts list ---- */
+  .stack { display: grid; grid-template-columns: calc(var(--s) * 1.5) minmax(0, 1fr); }
+  .plates { position: relative; height: calc(var(--s) + 5 * var(--gap) + 12px); list-style: none; }
+  .plate {
+    --side: var(--edge);
+    position: absolute;
+    left: 50%;
+    top: calc(var(--i) * var(--gap));
+    width: var(--s);
+    height: var(--s);
+    margin-left: calc(var(--s) / -2);
+    z-index: calc(10 - var(--i));
+    transform: scaleY(0.5) rotate(45deg);
+    background-color: var(--panel);
+    border: 2px solid var(--ink);
+    /* stepped shadows read as the plate's thickness once it is tilted */
+    box-shadow:
+      1px 1px 0 var(--side), 2px 2px 0 var(--side), 3px 3px 0 var(--side), 4px 4px 0 var(--side),
+      5px 5px 0 var(--side), 6px 6px 0 var(--side), 7px 7px 0 var(--side), 8px 8px 0 var(--side),
+      9px 9px 0 var(--side), 10px 10px 0 var(--side), 11px 11px 0 var(--side), 13px 13px 0 var(--ink);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
-  .skills > div:last-child { border-bottom: 0; }
-  .skills h3 {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--mask);
-    padding-top: 3px;
+  .p-app {
+    background-image:
+      linear-gradient(var(--line) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, var(--line) 1.5px, transparent 1.5px);
+    background-size: 25px 25px;
   }
-  .skills p { color: var(--ink-soft); }
+  .p-cloud {
+    background-image: radial-gradient(circle, var(--edge) 1.7px, transparent 2.2px);
+    background-size: 15px 15px;
+  }
+  .p-radio {
+    background-image: repeating-radial-gradient(circle at 100% 100%, transparent 0 11px, var(--edge) 11px 12.5px);
+  }
+  .p-fw {
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0 27px, var(--panel) 27px 35px),
+      repeating-linear-gradient(0deg, transparent 0 10px, var(--edge) 10px 11.5px);
+  }
+  .p-board {
+    --side: var(--fr4);
+    background-color: var(--mask);
+    background-image:
+      radial-gradient(circle, var(--pad) 2.4px, transparent 3px),
+      repeating-linear-gradient(90deg, transparent 0 13px, #C47A3D 13px 15px);
+    background-size: 30px 30px, auto;
+  }
+  .p-mech {
+    background-image: repeating-linear-gradient(0deg, transparent 0 7px, var(--edge) 7px 8.5px);
+  }
+  .plate.on { --side: var(--copper); border-color: var(--copper-ink); background-color: #FBEFE6; }
+  .p-board.on { background-color: var(--mask); }
 
-  footer {
-    margin: 64px 0 48px;
-    border-top: 1.5px solid var(--ink);
-    padding-top: 20px;
+  .partlist { padding-top: calc(var(--s) / 2 - var(--gap) / 2 - 26px); }
+  .parts-head {
     display: flex;
     justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    font-family: var(--mono);
-    font-size: 0.75rem;
+    height: 26px;
+    padding: 0 10px 0 68px;
+    font-size: 0.8rem;
     color: var(--ink-soft);
   }
-  footer a { color: var(--ink); }
+  .parts { list-style: none; }
+  .parts button {
+    position: relative;
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: center;
+    width: 100%;
+    height: var(--gap);
+    padding: 0 10px 0 32px;
+    text-align: left;
+    transition: background-color 0.15s ease;
+  }
+  .parts button::before {   /* leader line from the plate's corner */
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 50%;
+    width: 35px;
+    border-top: 1px solid var(--ink-soft);
+  }
+  .parts button:hover { background: var(--panel); }
+  .parts .no {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    background: var(--paper);
+    display: grid;
+    place-items: center;
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    position: relative;
+  }
+  .parts .what { min-width: 0; line-height: 1.25; }
+  .parts .nm { display: block; font-family: var(--cond); font-weight: 600; font-size: 1.12rem; }
+  .parts .tools {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .parts .qty { font-family: var(--mono); font-size: 0.82rem; color: var(--ink-soft); min-width: 2ch; text-align: right; }
+  .parts button[aria-pressed="true"] { background: var(--panel); }
+  .parts button[aria-pressed="true"] .no { background: var(--copper-ink); border-color: var(--copper-ink); color: #fff; }
+  .parts button[aria-pressed="true"] .qty { color: var(--copper-ink); font-weight: 500; }
+  .stack-hint { padding: 14px 10px 0 68px; font-size: 0.85rem; color: var(--ink-soft); }
 
+  @media (prefers-reduced-motion: no-preference) {
+    /* the one load moment: the stack assembles from the bottom plate up */
+    .plate { animation: settle 0.62s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc((5 - var(--i)) * 85ms + 120ms); }
+    .parts li { animation: appear 0.4s ease both; animation-delay: calc((5 - var(--i)) * 85ms + 420ms); }
+    @keyframes settle { from { opacity: 0; translate: 0 -54px; } to { opacity: 1; translate: 0 0; } }
+    @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* ---- sections ---- */
+  .sec { padding: 0 0 92px; }
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    border-top: 1.5px solid var(--ink);
+    padding-top: 14px;
+    margin-bottom: 30px;
+  }
+  .sec h2 { font-family: var(--cond); font-weight: 600; font-size: 1.9rem; letter-spacing: -0.01em; line-height: 1.1; }
+  .sec-note { font-size: 0.92rem; color: var(--ink-soft); }
+
+  /* ---- selected work ---- */
+  .work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 32px; }
+  .case-lead {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: end;
+  }
+  .shot {
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  .case-text { padding-top: 16px; }
+  .case-lead .case-text { padding-top: 0; }
+  .case h3 { font-family: var(--cond); font-weight: 600; font-size: 1.55rem; line-height: 1.15; }
+  .kind { font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 4px; }
+  .case-text > p { font-size: 0.98rem; color: var(--ink-soft); margin-top: 8px; max-width: 46ch; }
+  .case-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 0.94rem; }
+  .views { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-top: 18px; }
+  .views button {
+    font-size: 0.86rem;
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .views button:hover { border-color: var(--ink); }
+  .views button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  /* ---- build log ---- */
+  .filters { display: flex; flex-wrap: wrap; gap: 12px 34px; margin-bottom: 16px; }
+  .fgroup { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .fgroup > span { font-size: 0.86rem; color: var(--ink-soft); margin-right: 4px; }
+  .chip { font-size: 0.86rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 2px; }
+  .chip:hover { border-color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  .log { list-style: none; border-top: 1px solid var(--line); }
+  .log > li { border-bottom: 1px solid var(--line); }
+  .log > li:hover { background: var(--panel); }
+  .row {
+    display: grid;
+    grid-template-columns: 22px 46px 180px minmax(0, 1fr) 232px 98px;
+    gap: 18px;
+    align-items: baseline;
+    padding: 17px 8px;
+  }
+  .rev { font-family: var(--mono); font-size: 0.8rem; font-weight: 500; color: var(--copper-ink); }
+  .yr { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); }
+  .row h3 { font-size: 1.02rem; font-weight: 600; letter-spacing: -0.01em; }
+  .row p { font-size: 0.93rem; color: var(--ink-soft); }
+  .lay { font-size: 0.84rem; color: var(--ink-soft); }
+  .go, .st { font-size: 0.86rem; white-space: nowrap; justify-self: end; }
+  .st { color: var(--ink-soft); }
+  .log-empty { padding: 26px 8px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+  .log-empty button { color: var(--mask); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---- about ---- */
+  .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 32px; }
+  .about-body { grid-column: 2; }
+  .about-body > p { font-size: 1.2rem; line-height: 1.5; max-width: 54ch; }
+  .tools-table { margin-top: 34px; border-top: 1px solid var(--line); }
+  .tools-table > div {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .tools-table dt { font-weight: 600; }
+  .tools-table dd { color: var(--ink-soft); }
+
+  /* ---- contact ---- */
+  .mail {
+    display: inline-block;
+    font-family: var(--cond);
+    font-weight: 600;
+    font-size: clamp(2rem, 6.4vw, 4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--ink);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+    overflow-wrap: anywhere;
+  }
+  .mail:hover { color: var(--mask); }
+  .elsewhere { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; }
+  footer { padding: 0 0 44px; font-size: 0.86rem; color: var(--ink-soft); }
+
+  @media (max-width: 1000px) {
+    .hero { grid-template-columns: 1fr; gap: 44px; padding-bottom: 72px; }
+    .lede { max-width: 34ch; }
+    .row { grid-template-columns: 22px 46px 180px minmax(0, 1fr) 98px; }
+    .row .lay { grid-column: 4; grid-row: 2; }
+    .row .go, .row .st { grid-column: 5; grid-row: 1; }
+  }
   @media (max-width: 720px) {
-    .titleblock { grid-template-columns: 1fr; }
-    .tb-side { border-left: 0; border-top: 1.5px solid var(--ink); }
-    .row {
-      grid-template-columns: 22px 44px 1fr auto;
-      gap: 10px;
-      row-gap: 4px;
-    }
-    .row h2 { grid-column: 3; }
-    .row .go, .row .tagp { grid-column: 4; }
-    .row p { grid-column: 3 / -1; }
-    .shots { grid-template-columns: 1fr 1fr; padding-left: 8px; }
-    .skills > div { grid-template-columns: 1fr; gap: 4px; }
+    :root { --s: 132px; --gap: 44px; }
+    .top nav { gap: 18px; font-size: 0.92rem; }
+    .hero { padding-top: 24px; }
+    .stack { grid-template-columns: 1fr; }
+    .plates { width: calc(var(--s) * 1.5); margin: 0 auto 18px; }
+    .partlist { padding-top: 0; }
+    .parts-head { padding-left: 46px; }
+    .parts button { height: auto; min-height: 52px; padding: 8px 10px; border-top: 1px solid var(--line); }
+    .parts button::before { display: none; }
+    .parts .tools { white-space: normal; }
+    .stack-hint { padding-left: 46px; }
+    .sec { padding-bottom: 68px; }
+    .work { grid-template-columns: 1fr; gap: 44px; }
+    .case-lead { grid-template-columns: 1fr; gap: 0; }
+    .case-lead .case-text { padding-top: 16px; }
+    .row { grid-template-columns: 20px 40px minmax(0, 1fr) auto; gap: 4px 10px; padding: 15px 4px; }
+    .row h3 { grid-column: 3; grid-row: 1; }
+    .row .go, .row .st { grid-column: 4; grid-row: 1; }
+    .row p { grid-column: 3 / -1; grid-row: 2; }
+    .row .lay { grid-column: 3 / -1; grid-row: 3; }
+    .about { grid-template-columns: 1fr; gap: 0; }
+    .about-body { grid-column: 1; }
+    .about-body > p { font-size: 1.1rem; }
+    .tools-table > div { grid-template-columns: 1fr; gap: 2px; }
   }
 </style>
 </head>
-<body>
+<body id="top">
 <div class="wrap">
 
-  <header class="titleblock">
-    <div class="tb-main">
-      <p class="tb-eyebrow">Hardware · Firmware · Software</p>
-      <h1>Graham Patterson</h1>
-      <p class="tb-role"><b>Founder &amp; Engineer</b> · board to firmware to fleet to app</p>
-    </div>
-    <nav class="tb-side" aria-label="Contact">
-      <a href="https://ocutrap.com"><span>company</span>ocutrap.com</a>
-      <a href="https://github.com/grahamPatico"><span>github</span>grahamPatico</a>
-      <a href="mailto:graham@ocutrap.com"><span>email</span>graham@ocutrap.com</a>
+  <header class="top">
+    <a class="mark" href="#top" aria-label="Graham Patterson, top of page">
+      <svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="18" fill="#0E5A3A"/><circle cx="50" cy="50" r="20" fill="none" stroke="#F6F7F4" stroke-width="8"/><circle cx="50" cy="50" r="6" fill="#C47A3D"/></svg>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#log">Build log</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <p class="intro"><b>Build log.</b> Everything shipped, 2020 to now. One person, whole stack.</p>
+  <main>
+  <section class="hero">
+    <div>
+      <h1><span>Graham</span><span>Patterson</span></h1>
+      <p class="lede">Founder and engineer at OcuTrap. I take connected hardware from circuit board to app.</p>
+      <p class="reach">
+        <a href="mailto:graham@ocutrap.com">graham@ocutrap.com</a>
+        <a href="https://github.com/grahamPatico">GitHub</a>
+        <a href="https://www.linkedin.com/in/graham-r-patterson">LinkedIn</a>
+      </p>
+    </div>
 
-  <ol class="log">
-    <li><div class="row">
-      <span class="rev">A</span><span class="yr">2020</span>
-      <h2>Camera experiments</h2>
-      <p>OV2640 modules, images off tiny boards.</p>
-      <a class="go" href="https://github.com/grahamPatico/micropython-ov2640-Pycom">github</a>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">B</span><span class="yr">2021</span>
-      <h2>OcuTrap, the idea</h2>
-      <p>Traps don't report. Build one that does.</p>
-      <a class="go" href="https://ocutrap.com">ocutrap.com</a>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">C</span><span class="yr">2021</span>
-      <h2>Prototypes</h2>
-      <p>Dev boards, first cellular captures, duct tape.</p>
-      <span class="tagp">bench</span>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">D</span><span class="yr">2022</span>
-      <h2>OcuRover</h2>
-      <p>Remote rover platform. Multiple iterations, cameras, motors, radios.</p>
-      <span class="tagp">private</span>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">E</span><span class="yr nd">····</span>
-      <h2>Weather station</h2>
-      <p>Environmental sensing, logging, reporting.</p>
-      <span class="tagp">personal</span>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">F</span><span class="yr">2023</span>
-      <h2>OcuGate</h2>
-      <p>Connected gate control, same cellular DNA.</p>
-      <span class="tagp">private</span>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">G</span><span class="yr nd">····</span>
-      <h2>R1, production trap</h2>
-      <p>Custom PCB, motorized door, ToF capture detection, OTA fleet updates. Ships today.</p>
-      <a class="go" href="https://ocutrap.com">ocutrap.com</a>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">H</span><span class="yr nd">····</span>
-      <h2>OcuCam</h2>
-      <p>In-house ESP32 camera module. Images over cellular from nowhere.</p>
-      <span class="tagp">shipped</span>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">I</span><span class="yr nd">····</span>
-      <h2>Image recognition</h2>
-      <p>Species detection on every capture. Raccoon vs possum, automatically.</p>
-      <span class="tagp">shipped</span>
-    </div></li>
-    <li>
-      <div class="row">
-        <span class="rev">J</span><span class="yr nd">····</span>
-        <h2>OcuTrap platform</h2>
-        <p>Real-time web + mobile app on Convex. Fleet ops, analytics, billing, storefront.</p>
+    <div class="stack">
+      <ol class="plates" aria-hidden="true">
+        <li class="plate p-app" data-layer="app" style="--i:0"></li>
+        <li class="plate p-cloud" data-layer="cloud" style="--i:1"></li>
+        <li class="plate p-radio" data-layer="radio" style="--i:2"></li>
+        <li class="plate p-fw" data-layer="fw" style="--i:3"></li>
+        <li class="plate p-board" data-layer="board" style="--i:4"></li>
+        <li class="plate p-mech" data-layer="mech" style="--i:5"></li>
+      </ol>
+      <div class="partlist">
+        <p class="parts-head" aria-hidden="true"><span>Layer</span><span>Log entries</span></p>
+        <ol class="parts" aria-label="Layers of the stack. Select one to filter the build log.">
+          <li style="--i:0"><button type="button" data-set-layer="app" data-jump aria-pressed="false"><span class="no">1</span><span class="what"><span class="nm">App</span><span class="tools">TypeScript, React, React Native, Swift</span></span><span class="qty" data-count="app">4</span></button></li>
+          <li style="--i:1"><button type="button" data-set-layer="cloud" data-jump aria-pressed="false"><span class="no">2</span><span class="what"><span class="nm">Cloud</span><span class="tools">Convex, Node, Python, vision pipelines</span></span><span class="qty" data-count="cloud">3</span></button></li>
+          <li style="--i:2"><button type="button" data-set-layer="radio" data-jump aria-pressed="false"><span class="no">3</span><span class="what"><span class="nm">Radio</span><span class="tools">Cellular, OTA fleet updates</span></span><span class="qty" data-count="radio">6</span></button></li>
+          <li style="--i:3"><button type="button" data-set-layer="fw" data-jump aria-pressed="false"><span class="no">4</span><span class="what"><span class="nm">Firmware</span><span class="tools">Embedded C/C++, ESP32, Particle, power</span></span><span class="qty" data-count="fw">7</span></button></li>
+          <li style="--i:4"><button type="button" data-set-layer="board" data-jump aria-pressed="false"><span class="no">5</span><span class="what"><span class="nm">Board</span><span class="tools">KiCad, PCB layout, sensors, motor control</span></span><span class="qty" data-count="board">3</span></button></li>
+          <li style="--i:5"><button type="button" data-set-layer="mech" data-jump aria-pressed="false"><span class="no">6</span><span class="what"><span class="nm">Mechanical</span><span class="tools">Fusion 360, enclosures, DFM</span></span><span class="qty" data-count="mech">2</span></button></li>
+        </ol>
+        <p class="stack-hint">One person, whole stack. Select a layer to filter the build log.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="sec-head">
+      <h2>Selected work</h2>
+      <p class="sec-note">OcuTrap and side projects</p>
+    </div>
+    <div class="work">
+
+      <article class="case case-lead">
+        <div class="shot"><img id="platform-shot" src="img/platform.jpg" width="1400" height="875" alt="OcuTrap web app showing a grid of traps with wildlife photos, beside the mobile app showing a captured raccoon"></div>
+        <div class="case-text">
+          <p class="kind">OcuTrap</p>
+          <h3>OcuTrap platform</h3>
+          <p>Real-time web and mobile app on Convex. Fleet ops, analytics, billing, storefront.</p>
+          <div class="views" role="group" aria-label="Platform screens">
+            <button type="button" aria-pressed="true" data-shot="img/platform.jpg" data-alt="OcuTrap web app showing a grid of traps with wildlife photos, beside the mobile app showing a captured raccoon">Overview</button>
+            <button type="button" aria-pressed="false" data-shot="img/11-trap-detail.jpg" data-alt="Trap detail screen with latest image, arm mode and door controls">Trap detail</button>
+            <button type="button" aria-pressed="false" data-shot="img/28-map.jpg" data-alt="Fleet map screen">Map</button>
+            <button type="button" aria-pressed="false" data-shot="img/30-analytics.jpg" data-alt="Analytics screen">Analytics</button>
+          </div>
+          <p class="case-links"><a href="https://ocutrap.com">ocutrap.com</a></p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="shot"><img src="img/r1-open.jpg" width="1200" height="624" loading="lazy" alt="OcuTrap R1 on a cage trap, enclosure open, showing the control board, status LEDs and battery"></div>
+        <div class="case-text">
+          <p class="kind">OcuTrap</p>
+          <h3>R1, production trap</h3>
+          <p>Custom PCB, motorized door, ToF capture detection, OTA fleet updates. Ships today.</p>
+          <p class="case-links"><a href="https://ocutrap.com">ocutrap.com</a></p>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="shot"><img src="img/fabware.jpg" width="1280" height="800" loading="lazy" alt="Fabware home page: describe the part, get the DXF, the BOM, and the order link"></div>
+        <div class="case-text">
+          <p class="kind">Side project</p>
+          <h3>Fabware</h3>
+          <p>Describe a part, get a manufacturable DXF + McMaster-Carr BOM.</p>
+          <p class="case-links"><a href="https://fab-ware.com">fab-ware.com</a><a href="https://github.com/grahamPatico/fabware">GitHub</a></p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="sec" id="log">
+    <div class="sec-head">
+      <h2>Build log</h2>
+      <p class="sec-note" id="log-count" aria-live="polite">14 entries, 2020 to now</p>
+    </div>
+
+    <div class="filters">
+      <div class="fgroup" role="group" aria-label="Filter by kind">
+        <span>Show</span>
+        <button type="button" class="chip" data-set-kind="all" aria-pressed="true">Everything</button>
+        <button type="button" class="chip" data-set-kind="ocutrap" aria-pressed="false">OcuTrap</button>
+        <button type="button" class="chip" data-set-kind="side" aria-pressed="false">Side projects</button>
+      </div>
+      <div class="fgroup" role="group" aria-label="Filter by layer">
+        <span>Layer</span>
+        <button type="button" class="chip" data-set-layer="any" aria-pressed="true">Any</button>
+        <button type="button" class="chip" data-set-layer="app" aria-pressed="false">App</button>
+        <button type="button" class="chip" data-set-layer="cloud" aria-pressed="false">Cloud</button>
+        <button type="button" class="chip" data-set-layer="radio" aria-pressed="false">Radio</button>
+        <button type="button" class="chip" data-set-layer="fw" aria-pressed="false">Firmware</button>
+        <button type="button" class="chip" data-set-layer="board" aria-pressed="false">Board</button>
+        <button type="button" class="chip" data-set-layer="mech" aria-pressed="false">Mechanical</button>
+      </div>
+    </div>
+
+    <ol class="log" id="log-list">
+      <li data-kind="side" data-layers="fw"><div class="row">
+        <span class="rev">A</span><span class="yr">2020</span>
+        <h3>Camera experiments</h3>
+        <p>OV2640 modules, images off tiny boards.</p>
+        <span class="lay">Firmware</span>
+        <a class="go" href="https://github.com/grahamPatico/micropython-ov2640-Pycom">GitHub</a>
+      </div></li>
+      <li data-kind="ocutrap" data-layers=""><div class="row">
+        <span class="rev">B</span><span class="yr">2021</span>
+        <h3>OcuTrap, the idea</h3>
+        <p>Traps don't report. Build one that does.</p>
+        <span class="lay"></span>
         <a class="go" href="https://ocutrap.com">ocutrap.com</a>
-      </div>
-      <div class="shots">
-        <a href="img/11-trap-detail.jpg"><img src="img/11-trap-detail.jpg" alt="Trap detail view" loading="lazy"></a>
-        <a href="img/28-map.jpg"><img src="img/28-map.jpg" alt="Fleet map view" loading="lazy"></a>
-        <a href="img/30-analytics.jpg"><img src="img/30-analytics.jpg" alt="Analytics view" loading="lazy"></a>
-        <a href="img/39-fleet-grid.jpg"><img src="img/39-fleet-grid.jpg" alt="Fleet grid view" loading="lazy"></a>
-      </div>
-    </li>
-    <li><div class="row">
-      <span class="rev">K</span><span class="yr nd">····</span>
-      <h2>Christmas tree sizer</h2>
-      <p>Measures trees from images. Seasonal problem, engineered answer.</p>
-      <span class="tagp">personal</span>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">L</span><span class="yr">2026</span>
-      <h2>Fabware</h2>
-      <p>Describe a part, get a manufacturable DXF + McMaster-Carr BOM.</p>
-      <a class="go" href="https://github.com/grahamPatico/fabware">github</a>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">M</span><span class="yr">2026</span>
-      <h2>HeicDrop</h2>
-      <p>macOS menu bar image converter. One Swift file, zero dependencies.</p>
-      <a class="go" href="https://github.com/grahamPatico/HeicDrop">github</a>
-    </div></li>
-    <li><div class="row">
-      <span class="rev">N</span><span class="yr">2026</span>
-      <h2>X1, next generation</h2>
-      <p>New radio architecture, designed in KiCad. On the bench now.</p>
-      <span class="tagp">in design</span>
-    </div></li>
-  </ol>
+      </div></li>
+      <li data-kind="ocutrap" data-layers="fw radio"><div class="row">
+        <span class="rev">C</span><span class="yr">2021</span>
+        <h3>Prototypes</h3>
+        <p>Dev boards, first cellular captures, duct tape.</p>
+        <span class="lay">Firmware, Radio</span>
+        <span class="st">bench</span>
+      </div></li>
+      <li data-kind="side" data-layers="mech fw radio"><div class="row">
+        <span class="rev">D</span><span class="yr">2022</span>
+        <h3>OcuRover</h3>
+        <p>Remote rover platform. Multiple iterations, cameras, motors, radios.</p>
+        <span class="lay">Mechanical, Firmware, Radio</span>
+        <span class="st">private</span>
+      </div></li>
+      <li data-kind="side" data-layers="fw"><div class="row">
+        <span class="rev">E</span><span class="yr"></span>
+        <h3>Weather station</h3>
+        <p>Environmental sensing, logging, reporting.</p>
+        <span class="lay">Firmware</span>
+        <span class="st">personal</span>
+      </div></li>
+      <li data-kind="side" data-layers="fw radio"><div class="row">
+        <span class="rev">F</span><span class="yr">2023</span>
+        <h3>OcuGate</h3>
+        <p>Connected gate control, same cellular DNA.</p>
+        <span class="lay">Firmware, Radio</span>
+        <a class="go" href="https://ocugate.com">ocugate.com</a>
+      </div></li>
+      <li data-kind="ocutrap" data-layers="mech board fw radio"><div class="row">
+        <span class="rev">G</span><span class="yr"></span>
+        <h3>R1, production trap</h3>
+        <p>Custom PCB, motorized door, ToF capture detection, OTA fleet updates. Ships today.</p>
+        <span class="lay">Mechanical, Board, Firmware, Radio</span>
+        <a class="go" href="https://ocutrap.com">ocutrap.com</a>
+      </div></li>
+      <li data-kind="ocutrap" data-layers="board fw radio"><div class="row">
+        <span class="rev">H</span><span class="yr"></span>
+        <h3>OcuCam</h3>
+        <p>In-house ESP32 camera module. Images over cellular from nowhere.</p>
+        <span class="lay">Board, Firmware, Radio</span>
+        <span class="st">shipped</span>
+      </div></li>
+      <li data-kind="ocutrap" data-layers="cloud"><div class="row">
+        <span class="rev">I</span><span class="yr"></span>
+        <h3>Image recognition</h3>
+        <p>Species detection on every capture. Raccoon vs possum, automatically.</p>
+        <span class="lay">Cloud</span>
+        <span class="st">shipped</span>
+      </div></li>
+      <li data-kind="ocutrap" data-layers="cloud app"><div class="row">
+        <span class="rev">J</span><span class="yr"></span>
+        <h3>OcuTrap platform</h3>
+        <p>Real-time web and mobile app on Convex. Fleet ops, analytics, billing, storefront.</p>
+        <span class="lay">Cloud, App</span>
+        <a class="go" href="https://ocutrap.com">ocutrap.com</a>
+      </div></li>
+      <li data-kind="side" data-layers="app"><div class="row">
+        <span class="rev">K</span><span class="yr"></span>
+        <h3>Christmas tree sizer</h3>
+        <p>Measures trees from images. Seasonal problem, engineered answer.</p>
+        <span class="lay">App</span>
+        <span class="st">personal</span>
+      </div></li>
+      <li data-kind="side" data-layers="cloud app"><div class="row">
+        <span class="rev">L</span><span class="yr">2026</span>
+        <h3>Fabware</h3>
+        <p>Describe a part, get a manufacturable DXF + McMaster-Carr BOM.</p>
+        <span class="lay">Cloud, App</span>
+        <a class="go" href="https://fab-ware.com">fab-ware.com</a>
+      </div></li>
+      <li data-kind="side" data-layers="app"><div class="row">
+        <span class="rev">M</span><span class="yr">2026</span>
+        <h3>HeicDrop</h3>
+        <p>macOS menu bar image converter. One Swift file, zero dependencies.</p>
+        <span class="lay">App</span>
+        <a class="go" href="https://github.com/grahamPatico/HeicDrop">GitHub</a>
+      </div></li>
+      <li data-kind="ocutrap" data-layers="board radio"><div class="row">
+        <span class="rev">N</span><span class="yr">2026</span>
+        <h3>X1, next generation</h3>
+        <p>New radio architecture, designed in KiCad. On the bench now.</p>
+        <span class="lay">Board, Radio</span>
+        <span class="st">in design</span>
+      </div></li>
+    </ol>
+    <p class="log-empty" id="log-empty" hidden>Nothing in the log matches both filters. <button type="button" id="log-clear">Clear filters</button></p>
+  </section>
 
-  <div class="skills">
-    <div><h3>Firmware</h3><p>Embedded C/C++ · ESP32 · Particle · OTA · I2C/SPI/UART · cellular · power</p></div>
-    <div><h3>Hardware</h3><p>KiCad · PCB layout · Fusion 360 · sensors · motor control · DFM · batteries</p></div>
-    <div><h3>Software</h3><p>TypeScript · React · React Native · Convex · Node · Python · Swift</p></div>
-    <div><h3>Product</h3><p>Vision pipelines · Shopify · fleet ops · analytics · CI/CD · everything else</p></div>
-  </div>
+  <section class="sec" id="about">
+    <div class="sec-head"><h2>About</h2></div>
+    <div class="about">
+      <div class="about-body">
+        <p>Founder and engineer at OcuTrap since 2021. Traps don't report, so I built one that does: the board, the firmware, the cellular link, the cloud and the apps. Outside OcuTrap I build small tools and hardware projects. Most of them are in the build log.</p>
+        <dl class="tools-table">
+          <div><dt>Firmware</dt><dd>Embedded C/C++, ESP32, Particle, OTA, I2C/SPI/UART, cellular, power</dd></div>
+          <div><dt>Hardware</dt><dd>KiCad, PCB layout, Fusion 360, sensors, motor control, DFM, batteries</dd></div>
+          <div><dt>Software</dt><dd>TypeScript, React, React Native, Convex, Node, Python, Swift</dd></div>
+          <div><dt>Product</dt><dd>Vision pipelines, Shopify, fleet ops, analytics, CI/CD, everything else</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <span>Graham Patterson · Founder &amp; Engineer</span>
-    <span><a href="mailto:graham@ocutrap.com">email</a> · <a href="https://github.com/grahamPatico">GitHub</a> · <a href="https://ocutrap.com">OcuTrap</a></span>
-  </footer>
+  <section class="sec" id="contact">
+    <div class="sec-head"><h2>Contact</h2></div>
+    <a class="mail" href="mailto:graham@ocutrap.com">graham@ocutrap.com</a>
+    <p class="elsewhere">
+      <a href="https://github.com/grahamPatico">GitHub</a>
+      <a href="https://www.linkedin.com/in/graham-r-patterson">LinkedIn</a>
+      <a href="https://ocutrap.com">ocutrap.com</a>
+    </p>
+  </section>
+  </main>
+
+  <footer>Graham Patterson, 2026</footer>
 
 </div>
 
-<script type="module">
-  // Scroll-in reveal via motion (vanilla build). Page works untouched if this fails.
-  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    try {
-      const { animate } = await import("https://cdn.jsdelivr.net/npm/motion@11.13.5/+esm");
-      const rows = [...document.querySelectorAll(".log > li")];
+<script>
+  // Build log filters. The page reads fine with this off: every entry just stays visible.
+  (() => {
+    const rows = [...document.querySelectorAll("#log-list > li")];
+    const count = document.getElementById("log-count");
+    const empty = document.getElementById("log-empty");
+    const state = { kind: "all", layer: "any" };
+    const layersOf = (li) => li.dataset.layers.split(" ").filter(Boolean);
+
+    // parts list quantities come from the log itself, so they cannot drift
+    for (const el of document.querySelectorAll("[data-count]")) {
+      el.textContent = rows.filter((li) => layersOf(li).includes(el.dataset.count)).length;
+    }
+
+    const apply = () => {
+      let shown = 0;
       for (const li of rows) {
-        li.style.opacity = "0";
-        li.style.transform = "translateY(10px)";
+        const ok = (state.kind === "all" || li.dataset.kind === state.kind) &&
+                   (state.layer === "any" || layersOf(li).includes(state.layer));
+        li.hidden = !ok;
+        if (ok) shown++;
       }
-      const reveal = () => {
-        for (const li of rows) {
-          if (li.dataset.shown) continue;
-          if (li.getBoundingClientRect().top < innerHeight * 0.96) {
-            li.dataset.shown = "1";
-            animate(li, { opacity: 1, transform: "translateY(0)" }, { duration: 0.45, ease: [0.22, 1, 0.36, 1] });
-          }
-        }
-      };
-      addEventListener("scroll", reveal, { passive: true });
-      addEventListener("resize", reveal);
-      reveal();
-    } catch (e) { /* no motion, no problem */ }
-  }
+      count.textContent = shown === rows.length
+        ? `${shown} entries, 2020 to now`
+        : `${shown} of ${rows.length} entries`;
+      empty.hidden = shown > 0;
+      for (const b of document.querySelectorAll("[data-set-kind]")) b.setAttribute("aria-pressed", b.dataset.setKind === state.kind);
+      for (const b of document.querySelectorAll("[data-set-layer]")) b.setAttribute("aria-pressed", b.dataset.setLayer === state.layer);
+      for (const p of document.querySelectorAll(".plate")) p.classList.toggle("on", p.dataset.layer === state.layer);
+    };
+
+    for (const b of document.querySelectorAll("[data-set-kind]")) {
+      b.addEventListener("click", () => { state.kind = b.dataset.setKind; apply(); });
+    }
+    for (const b of document.querySelectorAll("[data-set-layer]")) {
+      b.addEventListener("click", () => {
+        const next = b.dataset.setLayer;
+        state.layer = state.layer === next ? "any" : next;   // second press clears
+        apply();
+        if ("jump" in b.dataset && state.layer !== "any") document.getElementById("log").scrollIntoView();
+      });
+    }
+    document.getElementById("log-clear").addEventListener("click", () => {
+      state.kind = "all"; state.layer = "any"; apply();
+    });
+
+    // platform screens
+    const shot = document.getElementById("platform-shot");
+    const views = [...document.querySelectorAll("[data-shot]")];
+    for (const b of views) {
+      b.addEventListener("click", () => {
+        shot.src = b.dataset.shot;
+        shot.alt = b.dataset.alt;
+        for (const v of views) v.setAttribute("aria-pressed", v === b);
+      });
+    }
+  })();
 </script>
 </body>
 </html>
