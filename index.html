@@ -3,21 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Graham Patterson</title>
-<meta name="description" content="Graham Patterson. Founder and engineer at OcuTrap. Hardware, firmware and software, 2020 to now.">
-<meta property="og:title" content="Graham Patterson">
+<title>Graham Patterson | Hardware &amp; Software Engineer</title>
+<meta name="description" content="Founder of OcuTrap. I build connected hardware, firmware and software, from circuit board to app. Explore selected projects and the build log.">
+<meta property="og:title" content="Graham Patterson | Hardware &amp; Software Engineer">
 <meta property="og:description" content="Founder and engineer. Connected hardware from circuit board to app.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://graham-patterson.vercel.app/">
-<meta property="og:image" content="https://graham-patterson.vercel.app/img/platform.jpg">
+<meta property="og:image" content="https://graham-patterson.vercel.app/img/social-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Graham Patterson. Hardware, firmware and software. Founder of OcuTrap.">
+<meta name="twitter:image:alt" content="Graham Patterson. Hardware, firmware and software. Founder of OcuTrap.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://graham-patterson.vercel.app/">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230E5A3A'/><circle cx='50' cy='50' r='20' fill='none' stroke='%23F6F7F4' stroke-width='8'/><circle cx='50' cy='50' r='6' fill='%23C47A3D'/></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/ibm-plex-mono-400.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/ibm-plex-mono-500.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-condensed-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-condensed-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
   :root {
     --paper: #F6F7F4;
     --panel: #FFFFFF;
@@ -56,6 +101,12 @@
     outline-offset: 3px;
     border-radius: 2px;
   }
+  .skip-link { position: absolute; top: 8px; left: 24px; z-index: 20; padding: 10px 16px; background: var(--paper); transform: translateY(-200%); }
+  .skip-link:focus { transform: translateY(0); }
+  #main:focus, #log-heading:focus { outline: 2px solid var(--copper-ink); outline-offset: 6px; }
+  .hero-actions { margin-top: 22px; }
+  .work-link { display: inline-block; padding: 9px 16px; background: var(--mask); color: white; text-decoration: none; font-weight: 500; }
+  .work-link:hover { background: var(--ink); color: white; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
   /* ---- top bar ---- */
@@ -209,7 +260,7 @@
     @keyframes settle { from { opacity: 0; translate: 0 -54px; } to { opacity: 1; translate: 0 0; } }
     @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 
   /* ---- sections ---- */
   .sec { padding: 0 0 92px; }
@@ -251,7 +302,9 @@
   .shot.shot-info img { width: 84px; height: 84px; border-radius: 19px; border: 1px solid var(--line); }
   .shot-info strong { display: block; font-family: var(--cond); font-weight: 600; font-size: 1.08rem; margin-bottom: 2px; }
   .shot-info ul { list-style: none; font-size: 0.85rem; line-height: 1.5; color: var(--ink-soft); }
-  .case-text { padding-top: 16px; }
+  .case:not(.case-lead) { display: flex; flex-direction: column; }
+  .case-text { padding-top: 16px; flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+  .case:not(.case-lead) .case-links { margin-top: auto; padding-top: 12px; }
   .case-lead .case-text { padding-top: 0; }
   .case h3 { font-family: var(--cond); font-weight: 600; font-size: 1.55rem; line-height: 1.15; }
   .kind { font-size: 0.86rem; color: var(--ink-soft); margin-bottom: 4px; }
@@ -259,6 +312,7 @@
   .case-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 0.94rem; }
   .views { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-top: 18px; }
   .views button {
+    min-height: 44px;
     font-size: 0.86rem;
     padding: 4px 9px;
     border: 1px solid var(--line);
@@ -271,7 +325,7 @@
   .filters { display: flex; flex-wrap: wrap; gap: 12px 34px; margin-bottom: 16px; }
   .fgroup { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
   .fgroup > span { font-size: 0.86rem; color: var(--ink-soft); margin-right: 4px; }
-  .chip { font-size: 0.86rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 2px; }
+  .chip { min-height: 44px; font-size: 0.86rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 2px; }
   .chip:hover { border-color: var(--ink); }
   .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
@@ -298,6 +352,7 @@
   /* ---- about ---- */
   .about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 32px; }
   .about-body { grid-column: 2; }
+  .about-body > p + p { margin-top: 20px; }
   .about-body > p { font-size: 1.2rem; line-height: 1.5; max-width: 54ch; }
   .tools-table { margin-top: 34px; border-top: 1px solid var(--line); }
   .tools-table > div {
@@ -337,34 +392,44 @@
     .row .go, .row .st { grid-column: 5; grid-row: 1; }
   }
   @media (max-width: 720px) {
-    :root { --s: 132px; --gap: 44px; }
     .top nav { gap: 18px; font-size: 0.92rem; }
     .hero { padding-top: 24px; }
-    .stack { grid-template-columns: 1fr; }
-    .plates { width: calc(var(--s) * 1.5); margin: 0 auto 18px; }
-    .partlist { padding-top: 0; }
-    .parts-head { padding-left: 46px; }
-    .parts button { height: auto; min-height: 52px; padding: 8px 10px; border-top: 1px solid var(--line); }
-    .parts button::before { display: none; }
-    .parts .tools { white-space: normal; }
-    .stack-hint { padding-left: 46px; }
+    :root { --s: 96px; --gap: 44px; }
+    .hero { gap: 28px; padding-bottom: 48px; }
+    .stack { grid-template-columns: calc(var(--s) * 1.5) minmax(0, 1fr); }
+    .partlist { padding-top: calc(var(--s) / 2 - var(--gap) / 2 - 26px); }
+    .parts-head { padding-left: 16px; font-size: 0.72rem; }
+    .parts button { padding: 0 8px 0 16px; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; }
+    .parts button::before { left: -5px; width: 15px; }
+    .parts .no, .parts .tools { display: none; }
+    .parts .nm { font-size: 1rem; }
+    .stack-hint { padding: 8px 0 0; font-size: 0.78rem; }
+    .sec-head { flex-wrap: wrap; gap: 8px 16px; }
+    .sec-head h2 { flex-shrink: 0; }
+    .shot.shot-info { gap: 16px; padding: 20px; min-height: 220px; aspect-ratio: auto; }
     .sec { padding-bottom: 68px; }
-    .work { grid-template-columns: 1fr; gap: 44px; }
+    .work { grid-template-columns: minmax(0, 1fr); gap: 44px; }
     .case-lead { grid-template-columns: 1fr; gap: 0; }
     .case-lead .case-text { padding-top: 16px; }
-    .row { grid-template-columns: 20px 40px minmax(0, 1fr) auto; gap: 4px 10px; padding: 15px 4px; }
-    .row h3 { grid-column: 3; grid-row: 1; }
-    .row .go, .row .st { grid-column: 4; grid-row: 1; }
-    .row p { grid-column: 3 / -1; grid-row: 2; }
-    .row .lay { grid-column: 3 / -1; grid-row: 3; }
+    .row { grid-template-columns: 20px 40px minmax(0, 1fr); gap: 6px 10px; padding: 18px 4px; }
+    .row h3 { grid-column: 1 / -1; grid-row: 2; }
+    .row .go, .row .st { grid-column: 3; grid-row: 1; }
+    .row p { grid-column: 1 / -1; grid-row: 3; }
+    .row .lay { grid-column: 1 / -1; grid-row: 4; }
     .about { grid-template-columns: 1fr; gap: 0; }
     .about-body { grid-column: 1; }
     .about-body > p { font-size: 1.1rem; }
     .tools-table > div { grid-template-columns: 1fr; gap: 2px; }
   }
+  @media (max-width: 360px) {
+    .wrap { padding: 0 16px; }
+    .top nav { gap: 12px; font-size: 0.85rem; }
+    :root { --s: 80px; }
+  }
 </style>
 </head>
 <body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="wrap">
 
   <header class="top">
@@ -379,11 +444,12 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main" tabindex="-1">
   <section class="hero">
     <div>
       <h1><span>Graham</span><span>Patterson</span></h1>
-      <p class="lede">Founder and engineer at OcuTrap. I take connected hardware from circuit board to app.</p>
+      <p class="lede">Founder of OcuTrap. I build connected hardware, firmware and software. Circuit board to app.</p>
+      <p class="hero-actions"><a class="work-link" href="#work">Explore selected work <span aria-hidden="true">↓</span></a></p>
       <p class="reach">
         <a href="mailto:grahampatterson14@gmail.com">grahampatterson14@gmail.com</a>
         <a href="https://github.com/grahamPatico">GitHub</a>
@@ -406,7 +472,7 @@
           <li style="--i:0"><button type="button" data-set-layer="app" data-jump aria-pressed="false"><span class="no">1</span><span class="what"><span class="nm">App</span><span class="tools">TypeScript, React, React Native, Swift</span></span><span class="qty" data-count="app">5</span></button></li>
           <li style="--i:1"><button type="button" data-set-layer="cloud" data-jump aria-pressed="false"><span class="no">2</span><span class="what"><span class="nm">Cloud</span><span class="tools">Convex, Node, Python, vision pipelines</span></span><span class="qty" data-count="cloud">3</span></button></li>
           <li style="--i:2"><button type="button" data-set-layer="radio" data-jump aria-pressed="false"><span class="no">3</span><span class="what"><span class="nm">Radio</span><span class="tools">Cellular, OTA fleet updates</span></span><span class="qty" data-count="radio">7</span></button></li>
-          <li style="--i:3"><button type="button" data-set-layer="fw" data-jump aria-pressed="false"><span class="no">4</span><span class="what"><span class="nm">Firmware</span><span class="tools">Embedded C/C++, ESP32, Particle, power</span></span><span class="qty" data-count="fw">8</span></button></li>
+          <li style="--i:3"><button type="button" data-set-layer="fw" data-jump aria-pressed="false"><span class="no">4</span><span class="what"><span class="nm">Firmware</span><span class="tools">Embedded C/C++, Particle, power</span></span><span class="qty" data-count="fw">8</span></button></li>
           <li style="--i:4"><button type="button" data-set-layer="board" data-jump aria-pressed="false"><span class="no">5</span><span class="what"><span class="nm">Board</span><span class="tools">KiCad, PCB layout, sensors, motor control</span></span><span class="qty" data-count="board">4</span></button></li>
           <li style="--i:5"><button type="button" data-set-layer="mech" data-jump aria-pressed="false"><span class="no">6</span><span class="what"><span class="nm">Mechanical</span><span class="tools">Fusion 360, enclosures, DFM</span></span><span class="qty" data-count="mech">3</span></button></li>
         </ol>
@@ -423,23 +489,23 @@
     <div class="work">
 
       <article class="case case-lead">
-        <div class="shot"><img id="platform-shot" src="img/platform.jpg" width="1400" height="875" alt="OcuTrap web app showing a grid of traps with wildlife photos, beside the mobile app showing a captured raccoon"></div>
+        <div class="shot"><img id="platform-shot" src="img/platform-1400.webp" srcset="img/platform-480.webp 480w, img/platform-800.webp 800w, img/platform-1400.webp 1400w" sizes="(max-width: 360px) calc(100vw - 32px), (max-width: 720px) calc(100vw - 48px), (max-width: 1120px) calc(66.67vw - 53.33px), 694px" decoding="async" loading="lazy" width="1400" height="875" alt="OcuTrap web app showing a grid of traps with wildlife photos, beside the mobile app showing a captured raccoon"></div>
         <div class="case-text">
           <p class="kind">OcuTrap</p>
           <h3>OcuTrap platform</h3>
           <p>Real-time web and mobile app on Convex. Fleet ops, analytics, billing, storefront.</p>
           <div class="views" role="group" aria-label="Platform screens">
-            <button type="button" aria-pressed="true" data-shot="img/platform.jpg" data-alt="OcuTrap web app showing a grid of traps with wildlife photos, beside the mobile app showing a captured raccoon">Overview</button>
-            <button type="button" aria-pressed="false" data-shot="img/11-trap-detail.jpg" data-alt="Trap detail screen with latest image, arm mode and door controls">Trap detail</button>
-            <button type="button" aria-pressed="false" data-shot="img/28-map.jpg" data-alt="Fleet map screen">Map</button>
-            <button type="button" aria-pressed="false" data-shot="img/30-analytics.jpg" data-alt="Analytics screen">Analytics</button>
+            <button type="button" aria-pressed="true" data-shot="img/platform-1400.webp" data-srcset="img/platform-480.webp 480w, img/platform-800.webp 800w, img/platform-1400.webp 1400w" data-width="1400" data-height="875" data-alt="OcuTrap web app showing a grid of traps with wildlife photos, beside the mobile app showing a captured raccoon">Overview</button>
+            <button type="button" aria-pressed="false" data-shot="img/11-trap-detail-1200.webp" data-srcset="img/11-trap-detail-480.webp 480w, img/11-trap-detail-800.webp 800w, img/11-trap-detail-1200.webp 1200w" data-width="1200" data-height="750" data-alt="Trap detail screen with latest image, arm mode and door controls">Trap detail</button>
+            <button type="button" aria-pressed="false" data-shot="img/28-map-1200.webp" data-srcset="img/28-map-480.webp 480w, img/28-map-800.webp 800w, img/28-map-1200.webp 1200w" data-width="1200" data-height="750" data-alt="Fleet map screen">Map</button>
+            <button type="button" aria-pressed="false" data-shot="img/30-analytics-1200.webp" data-srcset="img/30-analytics-480.webp 480w, img/30-analytics-800.webp 800w, img/30-analytics-1200.webp 1200w" data-width="1200" data-height="750" data-alt="Analytics screen">Analytics</button>
           </div>
           <p class="case-links"><a href="https://ocutrap.com">ocutrap.com</a></p>
         </div>
       </article>
 
       <article class="case">
-        <div class="shot"><img src="img/r1-open.jpg" width="1200" height="624" loading="lazy" alt="OcuTrap R1 on a cage trap, enclosure open, showing the control board, status LEDs and battery"></div>
+        <div class="shot"><img src="img/r1-open-1200.webp" srcset="img/r1-open-480.webp 480w, img/r1-open-800.webp 800w, img/r1-open-1200.webp 1200w" sizes="(max-width: 360px) calc(100vw - 32px), (max-width: 720px) calc(100vw - 48px), (max-width: 1120px) calc(50vw - 40px), 520px" decoding="async" width="1200" height="624" loading="lazy" alt="OcuTrap R1 on a cage trap, enclosure open, showing the control board, status LEDs and battery"></div>
         <div class="case-text">
           <p class="kind">OcuTrap</p>
           <h3>R1, production trap</h3>
@@ -449,7 +515,7 @@
       </article>
 
       <article class="case">
-        <div class="shot"><img src="img/fabware.jpg" width="1280" height="800" loading="lazy" alt="Fabware home page: describe the part, get the DXF, the BOM, and the order link"></div>
+        <div class="shot"><img src="img/fabware-1280.webp" srcset="img/fabware-480.webp 480w, img/fabware-800.webp 800w, img/fabware-1280.webp 1280w" sizes="(max-width: 360px) calc(100vw - 32px), (max-width: 720px) calc(100vw - 48px), (max-width: 1120px) calc(50vw - 40px), 520px" decoding="async" width="1280" height="800" loading="lazy" alt="Fabware home page: describe the part, get the DXF, the BOM, and the order link"></div>
         <div class="case-text">
           <p class="kind">Side project</p>
           <h3>Fabware</h3>
@@ -462,7 +528,7 @@
         <!-- TODO (Graham): add OcuGate images (product photos, app screens). Then replace this info tile
              with <div class="shot"><img ...></div> like the cards above. -->
         <div class="shot shot-info">
-          <img src="img/ocugate-icon.jpg" width="256" height="256" loading="lazy" alt="OcuGate app icon: a gate under a cellular signal">
+          <img src="img/ocugate-icon-168.webp" srcset="img/ocugate-icon-168.webp 168w" sizes="84px" decoding="async" width="168" height="168" loading="lazy" alt="OcuGate app icon: a gate under a cellular signal">
           <div>
             <strong>OcuGate for iPhone</strong>
             <ul>
@@ -483,7 +549,7 @@
       </article>
 
       <article class="case">
-        <div class="shot"><img src="img/tailsafe.jpg" width="1400" height="875" loading="lazy" alt="Two TailSafe rear bike lights glowing red in the dark"></div>
+        <div class="shot"><img src="img/tailsafe-1400.webp" srcset="img/tailsafe-480.webp 480w, img/tailsafe-800.webp 800w, img/tailsafe-1400.webp 1400w" sizes="(max-width: 360px) calc(100vw - 32px), (max-width: 720px) calc(100vw - 48px), (max-width: 1120px) calc(50vw - 40px), 520px" decoding="async" width="1400" height="875" loading="lazy" alt="Two TailSafe rear bike lights glowing red in the dark"></div>
         <div class="case-text">
           <p class="kind">Side project</p>
           <h3>TailSafe</h3>
@@ -492,7 +558,7 @@
         </div>
       </article>
       <article class="case">
-        <div class="shot"><img src="img/quad-flight.jpg" width="1222" height="763" loading="lazy" alt="Research quadcopter hovering against a blue sky"></div>
+        <div class="shot"><img src="img/quad-flight-1222.webp" srcset="img/quad-flight-480.webp 480w, img/quad-flight-800.webp 800w, img/quad-flight-1222.webp 1222w" sizes="(max-width: 360px) calc(100vw - 32px), (max-width: 720px) calc(100vw - 48px), (max-width: 1120px) calc(50vw - 40px), 520px" decoding="async" width="1222" height="763" loading="lazy" alt="Research quadcopter hovering against a blue sky"></div>
         <div class="case-text">
           <p class="kind">Texas A&amp;M, master's research</p>
           <h3>Helium-assisted quadcopter</h3>
@@ -500,15 +566,15 @@
         </div>
       </article>
       <article class="case">
-        <div class="shot"><img src="img/golf-stress.jpg" width="800" height="500" loading="lazy" alt="NDVI map of golf course turf, healthy grass in green and stressed grass in red"></div>
+        <div class="shot"><img src="img/golf-stress-800.webp" srcset="img/golf-stress-480.webp 480w, img/golf-stress-800.webp 800w" sizes="(max-width: 360px) calc(100vw - 32px), (max-width: 720px) calc(100vw - 48px), (max-width: 1120px) calc(50vw - 40px), 520px" decoding="async" width="800" height="500" loading="lazy" alt="NDVI map of golf course turf, healthy grass in green and stressed grass in red"></div>
         <div class="case-text">
           <p class="kind">High school senior project</p>
           <h3>Golf course drone imaging</h3>
           <p>Water is one of a golf course's biggest bills. Flew a drone with a near-infrared camera over a course, stitched the photos into maps and used NDVI to find over- and under-watered grass.</p>
           <div class="views" role="group" aria-label="Golf course maps">
-            <button type="button" aria-pressed="true" data-shot="img/golf-stress.jpg" data-alt="NDVI map of golf course turf, healthy grass in green and stressed grass in red">Stress map</button>
-            <button type="button" aria-pressed="false" data-shot="img/golf-ndvi.jpg" data-alt="NDVI map of a full golf hole, mostly red with green tree lines">Full hole</button>
-            <button type="button" aria-pressed="false" data-shot="img/golf-ortho.jpg" data-alt="Stitched aerial photo of a golf course fairway and trees">Aerial photo</button>
+            <button type="button" aria-pressed="true" data-shot="img/golf-stress-800.webp" data-srcset="img/golf-stress-480.webp 480w, img/golf-stress-800.webp 800w" data-width="800" data-height="500" data-alt="NDVI map of golf course turf, healthy grass in green and stressed grass in red">Stress map</button>
+            <button type="button" aria-pressed="false" data-shot="img/golf-ndvi-567.webp" data-srcset="img/golf-ndvi-480.webp 480w, img/golf-ndvi-567.webp 567w" data-width="567" data-height="354" data-alt="NDVI map of a full golf hole, mostly red with green tree lines">Full hole</button>
+            <button type="button" aria-pressed="false" data-shot="img/golf-ortho-1280.webp" data-srcset="img/golf-ortho-480.webp 480w, img/golf-ortho-800.webp 800w, img/golf-ortho-1280.webp 1280w" data-width="1280" data-height="800" data-alt="Stitched aerial photo of a golf course fairway and trees">Aerial photo</button>
           </div>
         </div>
       </article>
@@ -517,7 +583,7 @@
 
   <section class="sec" id="log">
     <div class="sec-head">
-      <h2>Build log</h2>
+      <h2 id="log-heading" tabindex="-1">Build log</h2>
       <p class="sec-note" id="log-count" aria-live="polite">18 entries, 2016 to now</p>
     </div>
 
@@ -552,7 +618,7 @@
       <li data-kind="side" data-layers="fw"><div class="row">
         <span class="rev">B</span><span class="yr">2020</span>
         <h3>Camera experiments</h3>
-        <p>OV2640 modules, images off tiny boards.</p>
+        <p>Camera modules, images off tiny boards.</p>
         <span class="lay">Firmware</span>
         <a class="go" href="https://github.com/grahamPatico/micropython-ov2640-Pycom">GitHub</a>
       </div></li>
@@ -622,7 +688,7 @@
       <li data-kind="ocutrap" data-layers="board fw radio"><div class="row">
         <span class="rev">L</span><span class="yr"></span>
         <h3>OcuCam</h3>
-        <p>In-house ESP32 camera module. Images over cellular from nowhere.</p>
+        <p>In-house camera module. Images over cellular from nowhere.</p>
         <span class="lay">Board, Firmware, Radio</span>
         <span class="st">shipped</span>
       </div></li>
@@ -679,7 +745,7 @@
         <p>Founder and engineer at OcuTrap since 2020. Traps don't report, so I built one that does: the board, the firmware, the cellular link, the cloud and the apps. Outside OcuTrap I build small tools and hardware projects. Most of them are in the build log.</p>
         <p>MS Engineering Technology, Texas A&amp;M (2023), with master's research on helium-assisted quadcopters. BS Industrial and Systems Engineering, Lehigh (2020). FAA Part 107 drone pilot since 2022.</p>
         <dl class="tools-table">
-          <div><dt>Firmware</dt><dd>Embedded C/C++, ESP32, Particle, OTA, I2C/SPI/UART, cellular, power</dd></div>
+          <div><dt>Firmware</dt><dd>Embedded C/C++, Particle, OTA, I2C/SPI/UART, cellular, power</dd></div>
           <div><dt>Hardware</dt><dd>KiCad, PCB layout, Fusion 360, sensors, motor control, DFM, batteries</dd></div>
           <div><dt>Software</dt><dd>TypeScript, React, React Native, Convex, Node, Python, Swift</dd></div>
           <div><dt>Product</dt><dd>Vision pipelines, Shopify, fleet ops, analytics, CI/CD, everything else</dd></div>
@@ -742,11 +808,15 @@
         const next = b.dataset.setLayer;
         state.layer = state.layer === next ? "any" : next;   // second press clears
         apply();
-        if ("jump" in b.dataset && state.layer !== "any") document.getElementById("log").scrollIntoView();
+        if ("jump" in b.dataset && state.layer !== "any") {
+          document.getElementById("log-heading").focus({ preventScroll: true });
+          document.getElementById("log").scrollIntoView();
+        }
       });
     }
     document.getElementById("log-clear").addEventListener("click", () => {
       state.kind = "all"; state.layer = "any"; apply();
+      document.querySelector('[data-set-kind="all"]').focus({ preventScroll: true });
     });
 
     // screen switchers: each .views group swaps the image in its own card
@@ -755,7 +825,10 @@
       const views = [...group.querySelectorAll("[data-shot]")];
       for (const b of views) {
         b.addEventListener("click", () => {
+          shot.srcset = b.dataset.srcset;
           shot.src = b.dataset.shot;
+          shot.width = Number(b.dataset.width);
+          shot.height = Number(b.dataset.height);
           shot.alt = b.dataset.alt;
           for (const v of views) v.setAttribute("aria-pressed", v === b);
         });

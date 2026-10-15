@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Portfolio social preview source</title>
+<style>
+@font-face { font-family: Plex; src: url('../fonts/ibm-plex-sans-latin.woff2'); font-weight: 400 600; }
+@font-face { font-family: Condensed; src: url('../fonts/ibm-plex-sans-condensed-700.woff2'); font-weight: 700; }
+* { box-sizing: border-box; margin: 0; }
+body { width: 1200px; height: 630px; background: #F6F7F4; color: #17211B; padding: 48px 64px; font-family: Plex, sans-serif; }
+header { border-top: 3px solid #17211B; padding-top: 16px; display: flex; justify-content: space-between; color: #4C5852; font-size: 19px; }
+main { display: flex; align-items: center; justify-content: space-between; height: 410px; }
+h1 { font: 700 112px/.94 Condensed; letter-spacing: -2px; }
+p { margin-top: 24px; font-size: 26px; color: #0E5A3A; }
+footer { border-top: 1px solid #AEB6AD; padding-top: 18px; font-size: 22px; display: flex; justify-content: space-between; }
+svg { width: 300px; height: 350px; }
+</style>
+<body>
+<header><span>GRAHAM PATTERSON / SELECTED WORK</span><span>CIRCUIT BOARD TO APP</span></header>
+<main><div><h1>Graham<br>Patterson</h1><p>Founder of OcuTrap</p></div>
+<svg viewBox="0 0 300 350" aria-hidden="true">
+<defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#D6DAD3" stroke-width="1"/></pattern><g id="plate"><path d="M20 70 150 5 280 70 150 135Z" fill="#fff" stroke="#17211B" stroke-width="2"/><path d="M20 70 150 135 280 70V80L150 145 20 80Z" fill="#AEB6AD" stroke="#17211B" stroke-width="2"/><path d="M20 70 150 5 280 70 150 135Z" fill="url(#grid)"/></g></defs>
+<use href="#plate" y="200"/><use href="#plate" y="160"/><path d="M20 230 150 165 280 230 150 295Z" fill="#0E5A3A" stroke="#17211B" stroke-width="2"/><path d="m70 230 80-40 80 40-80 40Z" fill="none" stroke="#B4622D" stroke-width="5"/><use href="#plate" y="120"/><use href="#plate" y="80"/><use href="#plate" y="40"/><use href="#plate"/>
+</svg></main>
+<footer><span>Hardware · Firmware · Software</span><span>graham-patterson.vercel.app</span></footer>
+</body>
+</html>
