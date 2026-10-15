@@ -418,7 +418,7 @@
   <section class="sec" id="work">
     <div class="sec-head">
       <h2>Selected work</h2>
-      <p class="sec-note">OcuTrap and side projects</p>
+      <p class="sec-note">OcuTrap, side projects and school</p>
     </div>
     <div class="work">
 
@@ -491,14 +491,34 @@
           <p class="case-links"><a href="https://tailsafe.vercel.app">tailsafe.vercel.app</a></p>
         </div>
       </article>
-
+      <article class="case">
+        <div class="shot"><img src="img/quad-flight.jpg" width="1222" height="763" loading="lazy" alt="Research quadcopter hovering against a blue sky"></div>
+        <div class="case-text">
+          <p class="kind">Texas A&amp;M, master's research</p>
+          <h3>Helium-assisted quadcopter</h3>
+          <p>Added helium lift to a quadcopter to make it more stable in flight. Tested materials, balloon shapes and flight performance. MS Engineering Technology, Mechatronics and IoT, 2023.</p>
+        </div>
+      </article>
+      <article class="case">
+        <div class="shot"><img src="img/golf-stress.jpg" width="800" height="500" loading="lazy" alt="NDVI map of golf course turf, healthy grass in green and stressed grass in red"></div>
+        <div class="case-text">
+          <p class="kind">High school senior project</p>
+          <h3>Golf course drone imaging</h3>
+          <p>Water is one of a golf course's biggest bills. Flew a drone with a near-infrared camera over a course, stitched the photos into maps and used NDVI to find over- and under-watered grass.</p>
+          <div class="views" role="group" aria-label="Golf course maps">
+            <button type="button" aria-pressed="true" data-shot="img/golf-stress.jpg" data-alt="NDVI map of golf course turf, healthy grass in green and stressed grass in red">Stress map</button>
+            <button type="button" aria-pressed="false" data-shot="img/golf-ndvi.jpg" data-alt="NDVI map of a full golf hole, mostly red with green tree lines">Full hole</button>
+            <button type="button" aria-pressed="false" data-shot="img/golf-ortho.jpg" data-alt="Stitched aerial photo of a golf course fairway and trees">Aerial photo</button>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 
   <section class="sec" id="log">
     <div class="sec-head">
       <h2>Build log</h2>
-      <p class="sec-note" id="log-count" aria-live="polite">15 entries, 2020 to now</p>
+      <p class="sec-note" id="log-count" aria-live="polite">18 entries, 2016 to now</p>
     </div>
 
     <div class="filters">
@@ -507,6 +527,7 @@
         <button type="button" class="chip" data-set-kind="all" aria-pressed="true">Everything</button>
         <button type="button" class="chip" data-set-kind="ocutrap" aria-pressed="false">OcuTrap</button>
         <button type="button" class="chip" data-set-kind="side" aria-pressed="false">Side projects</button>
+        <button type="button" class="chip" data-set-kind="school" aria-pressed="false">School</button>
       </div>
       <div class="fgroup" role="group" aria-label="Filter by layer">
         <span>Layer</span>
@@ -521,106 +542,127 @@
     </div>
 
     <ol class="log" id="log-list">
+      <li data-kind="school" data-layers=""><div class="row">
+        <span class="rev">A</span><span class="yr">2016</span>
+        <h3>Golf course drone imaging</h3>
+        <p>High school senior project. Near-infrared drone maps and NDVI to find stressed, over- and under-watered grass.</p>
+        <span class="lay"></span>
+        <span class="st">school</span>
+      </div></li>
       <li data-kind="side" data-layers="fw"><div class="row">
-        <span class="rev">A</span><span class="yr">2020</span>
+        <span class="rev">B</span><span class="yr">2020</span>
         <h3>Camera experiments</h3>
         <p>OV2640 modules, images off tiny boards.</p>
         <span class="lay">Firmware</span>
         <a class="go" href="https://github.com/grahamPatico/micropython-ov2640-Pycom">GitHub</a>
       </div></li>
       <li data-kind="ocutrap" data-layers=""><div class="row">
-        <span class="rev">B</span><span class="yr">2020</span>
+        <span class="rev">C</span><span class="yr">2020</span>
         <h3>OcuTrap, the idea</h3>
         <p>Traps don't report. Build one that does.</p>
         <span class="lay"></span>
         <a class="go" href="https://ocutrap.com">ocutrap.com</a>
       </div></li>
       <li data-kind="side" data-layers="app"><div class="row">
-        <span class="rev">C</span><span class="yr">2020</span>
+        <span class="rev">D</span><span class="yr">2020</span>
         <h3>Xmas Tree Sizer</h3>
         <p>iPhone AR app. See a Christmas tree at different heights in your room before you buy one.</p>
         <span class="lay">App</span>
         <a class="go" href="https://apps.apple.com/us/app/xmas-tree-sizer/id1545536375">App Store</a>
       </div></li>
       <li data-kind="ocutrap" data-layers="fw radio"><div class="row">
-        <span class="rev">D</span><span class="yr">2021</span>
+        <span class="rev">E</span><span class="yr">2021</span>
         <h3>Prototypes</h3>
         <p>Dev boards, first cellular captures, duct tape.</p>
         <span class="lay">Firmware, Radio</span>
         <span class="st">bench</span>
       </div></li>
       <li data-kind="side" data-layers="mech fw radio"><div class="row">
-        <span class="rev">E</span><span class="yr">2022</span>
+        <span class="rev">F</span><span class="yr">2022</span>
         <h3>OcuRover</h3>
         <p>Remote rover platform. Multiple iterations, cameras, motors, radios.</p>
         <span class="lay">Mechanical, Firmware, Radio</span>
         <span class="st">private</span>
       </div></li>
+      <li data-kind="school" data-layers=""><div class="row">
+        <span class="rev">G</span><span class="yr">2022</span>
+        <h3>FAA Part 107</h3>
+        <p>Remote Pilot Certificate. Licensed to fly small drones commercially.</p>
+        <span class="lay"></span>
+        <span class="st">certified</span>
+      </div></li>
+      <li data-kind="school" data-layers="mech"><div class="row">
+        <span class="rev">H</span><span class="yr">2023</span>
+        <h3>Helium-assisted quadcopter</h3>
+        <p>Master's research at Texas A&amp;M. Helium lift for a steadier quadcopter. Materials, balloon shapes, flight tests.</p>
+        <span class="lay">Mechanical</span>
+        <span class="st">research</span>
+      </div></li>
       <li data-kind="side" data-layers="fw"><div class="row">
-        <span class="rev">F</span><span class="yr"></span>
+        <span class="rev">I</span><span class="yr"></span>
         <h3>Weather station</h3>
         <p>Environmental sensing, logging, reporting.</p>
         <span class="lay">Firmware</span>
         <span class="st">personal</span>
       </div></li>
       <li data-kind="side" data-layers="fw radio app"><div class="row">
-        <span class="rev">G</span><span class="yr">2023</span>
+        <span class="rev">J</span><span class="yr">2023</span>
         <h3>OcuGate</h3>
         <p>Cellular gate controller with an iPhone app. Open, close and share access from anywhere.</p>
         <span class="lay">Firmware, Radio, App</span>
         <a class="go" href="https://apps.apple.com/us/app/ocugate/id1571187146">App Store</a>
       </div></li>
       <li data-kind="ocutrap" data-layers="mech board fw radio"><div class="row">
-        <span class="rev">H</span><span class="yr"></span>
+        <span class="rev">K</span><span class="yr"></span>
         <h3>R1, production trap</h3>
         <p>Custom PCB, motorized door, ToF capture detection, OTA fleet updates. Ships today.</p>
         <span class="lay">Mechanical, Board, Firmware, Radio</span>
         <a class="go" href="https://ocutrap.com">ocutrap.com</a>
       </div></li>
       <li data-kind="ocutrap" data-layers="board fw radio"><div class="row">
-        <span class="rev">I</span><span class="yr"></span>
+        <span class="rev">L</span><span class="yr"></span>
         <h3>OcuCam</h3>
         <p>In-house ESP32 camera module. Images over cellular from nowhere.</p>
         <span class="lay">Board, Firmware, Radio</span>
         <span class="st">shipped</span>
       </div></li>
       <li data-kind="ocutrap" data-layers="cloud"><div class="row">
-        <span class="rev">J</span><span class="yr"></span>
+        <span class="rev">M</span><span class="yr"></span>
         <h3>Image recognition</h3>
         <p>Species detection on every capture. Raccoon vs possum, automatically.</p>
         <span class="lay">Cloud</span>
         <span class="st">shipped</span>
       </div></li>
       <li data-kind="ocutrap" data-layers="cloud app"><div class="row">
-        <span class="rev">K</span><span class="yr"></span>
+        <span class="rev">N</span><span class="yr"></span>
         <h3>OcuTrap platform</h3>
         <p>Real-time web and mobile app on Convex. Fleet ops, analytics, billing, storefront.</p>
         <span class="lay">Cloud, App</span>
         <a class="go" href="https://ocutrap.com">ocutrap.com</a>
       </div></li>
       <li data-kind="side" data-layers="cloud app"><div class="row">
-        <span class="rev">L</span><span class="yr">2026</span>
+        <span class="rev">O</span><span class="yr">2026</span>
         <h3>Fabware</h3>
         <p>Describe a part, get a manufacturable DXF + McMaster-Carr BOM.</p>
         <span class="lay">Cloud, App</span>
         <a class="go" href="https://fab-ware.com">fab-ware.com</a>
       </div></li>
       <li data-kind="side" data-layers="app"><div class="row">
-        <span class="rev">M</span><span class="yr">2026</span>
+        <span class="rev">P</span><span class="yr">2026</span>
         <h3>HeicDrop</h3>
         <p>macOS menu bar image converter. One Swift file, zero dependencies.</p>
         <span class="lay">App</span>
         <a class="go" href="https://github.com/grahamPatico/HeicDrop">GitHub</a>
       </div></li>
       <li data-kind="ocutrap" data-layers="board radio"><div class="row">
-        <span class="rev">N</span><span class="yr">2026</span>
+        <span class="rev">Q</span><span class="yr">2026</span>
         <h3>X1, next generation</h3>
         <p>New radio architecture, designed in KiCad. On the bench now.</p>
         <span class="lay">Board, Radio</span>
         <span class="st">in design</span>
       </div></li>
       <li data-kind="side" data-layers="mech board fw radio"><div class="row">
-        <span class="rev">O</span><span class="yr">2026</span>
+        <span class="rev">R</span><span class="yr">2026</span>
         <h3>TailSafe</h3>
         <p>Rear bike light that is also a GPS and cellular tracker. Designed, not built yet.</p>
         <span class="lay">Mechanical, Board, Firmware, Radio</span>
@@ -635,6 +677,7 @@
     <div class="about">
       <div class="about-body">
         <p>Founder and engineer at OcuTrap since 2020. Traps don't report, so I built one that does: the board, the firmware, the cellular link, the cloud and the apps. Outside OcuTrap I build small tools and hardware projects. Most of them are in the build log.</p>
+        <p>MS Engineering Technology, Texas A&amp;M (2023), with master's research on helium-assisted quadcopters. BS Industrial and Systems Engineering, Lehigh (2020). FAA Part 107 drone pilot since 2022.</p>
         <dl class="tools-table">
           <div><dt>Firmware</dt><dd>Embedded C/C++, ESP32, Particle, OTA, I2C/SPI/UART, cellular, power</dd></div>
           <div><dt>Hardware</dt><dd>KiCad, PCB layout, Fusion 360, sensors, motor control, DFM, batteries</dd></div>
@@ -683,7 +726,7 @@
         if (ok) shown++;
       }
       count.textContent = shown === rows.length
-        ? `${shown} entries, 2020 to now`
+        ? `${shown} entries, 2016 to now`
         : `${shown} of ${rows.length} entries`;
       empty.hidden = shown > 0;
       for (const b of document.querySelectorAll("[data-set-kind]")) b.setAttribute("aria-pressed", b.dataset.setKind === state.kind);
@@ -706,15 +749,17 @@
       state.kind = "all"; state.layer = "any"; apply();
     });
 
-    // platform screens
-    const shot = document.getElementById("platform-shot");
-    const views = [...document.querySelectorAll("[data-shot]")];
-    for (const b of views) {
-      b.addEventListener("click", () => {
-        shot.src = b.dataset.shot;
-        shot.alt = b.dataset.alt;
-        for (const v of views) v.setAttribute("aria-pressed", v === b);
-      });
+    // screen switchers: each .views group swaps the image in its own card
+    for (const group of document.querySelectorAll(".views")) {
+      const shot = group.closest(".case").querySelector(".shot img");
+      const views = [...group.querySelectorAll("[data-shot]")];
+      for (const b of views) {
+        b.addEventListener("click", () => {
+          shot.src = b.dataset.shot;
+          shot.alt = b.dataset.alt;
+          for (const v of views) v.setAttribute("aria-pressed", v === b);
+        });
+      }
     }
   })();
 </script>
