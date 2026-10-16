@@ -1,0 +1,138 @@
+[
+  {
+    "path": "img/platform-1400.webp",
+    "status": 200
+  },
+  {
+    "path": "img/platform-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/platform-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/r1-open-1200.webp",
+    "status": 200
+  },
+  {
+    "path": "img/r1-open-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/r1-open-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/fabware-1280.webp",
+    "status": 200
+  },
+  {
+    "path": "img/fabware-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/fabware-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/ocugate-icon-168.webp",
+    "status": 200
+  },
+  {
+    "path": "img/tailsafe-1400.webp",
+    "status": 200
+  },
+  {
+    "path": "img/tailsafe-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/tailsafe-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/quad-flight-1222.webp",
+    "status": 200
+  },
+  {
+    "path": "img/quad-flight-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/quad-flight-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/golf-stress-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/golf-stress-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/11-trap-detail-1200.webp",
+    "status": 200
+  },
+  {
+    "path": "img/11-trap-detail-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/11-trap-detail-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/28-map-1200.webp",
+    "status": 200
+  },
+  {
+    "path": "img/28-map-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/28-map-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/30-analytics-1200.webp",
+    "status": 200
+  },
+  {
+    "path": "img/30-analytics-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/30-analytics-800.webp",
+    "status": 200
+  },
+  {
+    "path": "img/golf-ndvi-567.webp",
+    "status": 200
+  },
+  {
+    "path": "img/golf-ndvi-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/golf-ortho-1280.webp",
+    "status": 200
+  },
+  {
+    "path": "img/golf-ortho-480.webp",
+    "status": 200
+  },
+  {
+    "path": "img/golf-ortho-800.webp",
+    "status": 200
+  },
+  {
+    "path": "fonts/ibm-plex-sans-latin.woff2",
+    "status": 200
+  },
+  {
+    "path": "fonts/ibm-plex-sans-condensed-700.woff2",
+    "status": 200
+  }
+]
