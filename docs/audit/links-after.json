@@ -1,0 +1,57 @@
+[
+  {
+    "url": "https://github.com/grahamPatico",
+    "status": 200,
+    "final": "https://github.com/grahamPatico"
+  },
+  {
+    "url": "https://www.linkedin.com/in/graham-r-patterson",
+    "status": 999,
+    "final": "https://www.linkedin.com/in/graham-r-patterson"
+  },
+  {
+    "url": "https://ocutrap.com/",
+    "status": 200,
+    "final": "https://ocutrap.com/"
+  },
+  {
+    "url": "https://fab-ware.com/",
+    "status": 200,
+    "final": "https://fab-ware.com/"
+  },
+  {
+    "url": "https://github.com/grahamPatico/fabware",
+    "status": 200,
+    "final": "https://github.com/grahamPatico/fabware"
+  },
+  {
+    "url": "https://apps.apple.com/us/app/ocugate/id1571187146",
+    "status": 200,
+    "final": "https://apps.apple.com/us/app/ocugate/id1571187146"
+  },
+  {
+    "url": "https://ocugate.com/",
+    "status": 200,
+    "final": "https://ocugate.com/"
+  },
+  {
+    "url": "https://tailsafe.vercel.app/",
+    "status": 200,
+    "final": "https://tailsafe.vercel.app/"
+  },
+  {
+    "url": "https://github.com/grahamPatico/micropython-ov2640-Pycom",
+    "status": 200,
+    "final": "https://github.com/grahamPatico/micropython-ov2640-Pycom"
+  },
+  {
+    "url": "https://apps.apple.com/us/app/xmas-tree-sizer/id1545536375",
+    "status": 200,
+    "final": "https://apps.apple.com/us/app/xmas-tree-sizer/id1545536375"
+  },
+  {
+    "url": "https://github.com/grahamPatico/HeicDrop",
+    "status": 200,
+    "final": "https://github.com/grahamPatico/HeicDrop"
+  }
+]
